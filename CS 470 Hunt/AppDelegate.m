@@ -7,9 +7,14 @@
 //
 
 #import "AppDelegate.h"
+#import "DownloadAssistant.h"
+
+#import "HuntDataSource.h"
+#import "HuntTableViewController.h"
 
 @interface AppDelegate ()
-
+@property (nonatomic) DownloadAssistant *downloadAssistant;
+@property (nonatomic) HuntDataSource *dataSource;
 @end
 
 @implementation AppDelegate

@@ -14,6 +14,12 @@
 		3F28BCE81ADC49A300FCCEC1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F28BCE71ADC49A300FCCEC1 /* Images.xcassets */; };
 		3F28BCEB1ADC49A300FCCEC1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F28BCE91ADC49A300FCCEC1 /* LaunchScreen.xib */; };
 		3F28BCF71ADC49A300FCCEC1 /* CS_470_HuntTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F28BCF61ADC49A300FCCEC1 /* CS_470_HuntTests.m */; };
+		3FBFE0971ADC74FC008C4971 /* Hunt.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFE0961ADC74FC008C4971 /* Hunt.m */; };
+		3FBFE09A1ADC787D008C4971 /* HuntDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFE0991ADC787D008C4971 /* HuntDataSource.m */; };
+		3FBFE09D1ADC7904008C4971 /* DownloadAssistant.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFE09C1ADC7904008C4971 /* DownloadAssistant.m */; };
+		3FBFE0A01ADC79C0008C4971 /* HuntTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFE09F1ADC79C0008C4971 /* HuntTableViewController.m */; };
+		3FBFE0A31ADC7A36008C4971 /* HuntDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFE0A21ADC7A36008C4971 /* HuntDetailViewController.m */; };
+		3FBFE0A61ADC7A5D008C4971 /* Step.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFE0A51ADC7A5D008C4971 /* Step.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +46,18 @@
 		3F28BCF01ADC49A300FCCEC1 /* CS 470 HuntTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CS 470 HuntTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F28BCF51ADC49A300FCCEC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F28BCF61ADC49A300FCCEC1 /* CS_470_HuntTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CS_470_HuntTests.m; sourceTree = "<group>"; };
+		3FBFE0951ADC74FC008C4971 /* Hunt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hunt.h; sourceTree = "<group>"; };
+		3FBFE0961ADC74FC008C4971 /* Hunt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Hunt.m; sourceTree = "<group>"; };
+		3FBFE0981ADC787D008C4971 /* HuntDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HuntDataSource.h; sourceTree = "<group>"; };
+		3FBFE0991ADC787D008C4971 /* HuntDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HuntDataSource.m; sourceTree = "<group>"; };
+		3FBFE09B1ADC7904008C4971 /* DownloadAssistant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadAssistant.h; sourceTree = "<group>"; };
+		3FBFE09C1ADC7904008C4971 /* DownloadAssistant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadAssistant.m; sourceTree = "<group>"; };
+		3FBFE09E1ADC79C0008C4971 /* HuntTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HuntTableViewController.h; sourceTree = "<group>"; };
+		3FBFE09F1ADC79C0008C4971 /* HuntTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HuntTableViewController.m; sourceTree = "<group>"; };
+		3FBFE0A11ADC7A36008C4971 /* HuntDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HuntDetailViewController.h; sourceTree = "<group>"; };
+		3FBFE0A21ADC7A36008C4971 /* HuntDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HuntDetailViewController.m; sourceTree = "<group>"; };
+		3FBFE0A41ADC7A5C008C4971 /* Step.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Step.h; sourceTree = "<group>"; };
+		3FBFE0A51ADC7A5D008C4971 /* Step.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Step.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +103,18 @@
 				3F28BCDF1ADC49A200FCCEC1 /* AppDelegate.m */,
 				3F28BCE11ADC49A200FCCEC1 /* ViewController.h */,
 				3F28BCE21ADC49A200FCCEC1 /* ViewController.m */,
+				3FBFE09B1ADC7904008C4971 /* DownloadAssistant.h */,
+				3FBFE09C1ADC7904008C4971 /* DownloadAssistant.m */,
+				3FBFE0951ADC74FC008C4971 /* Hunt.h */,
+				3FBFE0961ADC74FC008C4971 /* Hunt.m */,
+				3FBFE0A41ADC7A5C008C4971 /* Step.h */,
+				3FBFE0A51ADC7A5D008C4971 /* Step.m */,
+				3FBFE0981ADC787D008C4971 /* HuntDataSource.h */,
+				3FBFE0991ADC787D008C4971 /* HuntDataSource.m */,
+				3FBFE09E1ADC79C0008C4971 /* HuntTableViewController.h */,
+				3FBFE09F1ADC79C0008C4971 /* HuntTableViewController.m */,
+				3FBFE0A11ADC7A36008C4971 /* HuntDetailViewController.h */,
+				3FBFE0A21ADC7A36008C4971 /* HuntDetailViewController.m */,
 				3F28BCE41ADC49A300FCCEC1 /* Main.storyboard */,
 				3F28BCE71ADC49A300FCCEC1 /* Images.xcassets */,
 				3F28BCE91ADC49A300FCCEC1 /* LaunchScreen.xib */,
@@ -219,8 +249,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FBFE0971ADC74FC008C4971 /* Hunt.m in Sources */,
+				3FBFE0A61ADC7A5D008C4971 /* Step.m in Sources */,
 				3F28BCE31ADC49A200FCCEC1 /* ViewController.m in Sources */,
+				3FBFE0A01ADC79C0008C4971 /* HuntTableViewController.m in Sources */,
+				3FBFE09D1ADC7904008C4971 /* DownloadAssistant.m in Sources */,
+				3FBFE09A1ADC787D008C4971 /* HuntDataSource.m in Sources */,
 				3F28BCE01ADC49A200FCCEC1 /* AppDelegate.m in Sources */,
+				3FBFE0A31ADC7A36008C4971 /* HuntDetailViewController.m in Sources */,
 				3F28BCDD1ADC49A200FCCEC1 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -414,6 +450,7 @@
 				3F28BCFC1ADC49A300FCCEC1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3F28BCFD1ADC49A300FCCEC1 /* Build configuration list for PBXNativeTarget "CS 470 HuntTests" */ = {
 			isa = XCConfigurationList;
@@ -422,6 +459,7 @@
 				3F28BCFF1ADC49A300FCCEC1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
