@@ -145,6 +145,8 @@ static NSString *tableCellViewID = @"Cell";
     
 //    MoviesTableViewController *mvc = [[MoviesTableViewController alloc] initWithTheater:(theaters *)self.theater];
 //    [self.navigationController pushViewController:mvc animated:YES];
+//    HuntDetailViewController *hdvc = [[HuntDetailViewController alloc] init];
+  //  [self.navigationController pushViewController:hdvc animated:YES];
     
     
 }

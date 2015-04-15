@@ -10,4 +10,11 @@
 
 @implementation HuntDetailViewController
 
+- (void) viewDidLoad
+{
+    [super viewDidLoad];
+    NSLog( @"in detailed view" );
+
+}
+
 @end
