@@ -7,11 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface Hunt : NSObject
 
 @property (nonatomic) NSMutableDictionary *huntAttributes;
 
 -(id) initWithDictionary: (NSDictionary *) dictionary;
+- (void) addValue: (NSString *) attrVal forAttribute: (NSString *) attrName;
+- (NSString *) getValueForAttribute: (NSString *) attr;
+- (NSString *) title;
+- (CGSize) sizeOfListEntryView;
+- (NSAttributedString *) compose: str withBoldPrefix: (NSString *) prefix;
+- (void) print;
 
 @end

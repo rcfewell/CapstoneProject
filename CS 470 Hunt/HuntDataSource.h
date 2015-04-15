@@ -17,14 +17,24 @@
 @property (nonatomic) id<DataSourceReadyForUseDelegate> delegate;
 @property (nonatomic) BOOL dataReadyForUse;
 
-@property (nonatomic, copy) NSString *huntsURLString;
-@property (nonatomic) NSData *huntsNSData;
-@property (nonatomic) NSMutableArray *allHunts;
-@property (nonatomic) DownloadAssistant *downloadAssistant;
+- (NSMutableArray *) allHunts;
+- (instancetype) initWithHuntsURLString: (NSString *) hURL;
+- (void) processHuntJSON;
+- (void) print;
+- (void) acceptWebData:(NSData *) webData forURL:(NSURL *) url;
+- (Hunt *) huntWithName: (NSString *) huntName;
+- (NSArray *) getAllhunts;
+- (BOOL) deleteHuntAtIndex: (NSInteger) idx;
+- (Hunt *) huntAtIndex: (int) idx;
+- (NSInteger ) numberOfHunts;
+- (NSString *) HuntsTabBarTitle;
+
 
 @end
 
 @protocol DataSourceReadyForUseDelegate <NSObject>
+
+
 
 @optional
 

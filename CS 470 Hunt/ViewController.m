@@ -9,6 +9,8 @@
 #import "ViewController.h"
 
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *huntsButton;
+@property (weak, nonatomic) IBOutlet UIButton *createButton;
 
 @end
 
@@ -18,6 +20,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 }
+
+- (IBAction)didPressHuntsButton:(UIButton *)sender
+{
+    NSLog( @"Did Press Hunts Button" );
+}
+
+- (IBAction)didPressCreateButton:(UIButton *)sender
+{
+    NSLog( @"Did Press Create Button" );
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
