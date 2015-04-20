@@ -14,15 +14,25 @@
 
 @interface StepDataSource : NSObject<WebDataReadyDelegate>
 
-//@property (nonatomic) id<DataSourceReadyForUseDelegate> delegate;
 @property (nonatomic) id<DataSourceReadyForUseDelegate> delegate;
 @property (nonatomic) BOOL dataReadyForUse;
+
+- (instancetype) initWithStepsURL: (NSString *) sURL;
+- (void) processStepJSON;
+- (void) print;
+- (void) acceptWebData:(NSData *) webData forURL:(NSURL *) url;
+- (Step *) stepWithName: (NSString *) stepName;
+- (NSArray *) getAllSteps;
+-(BOOL) deleteStepAtIndex: (NSInteger) idx;
+- (Step *) stepAtIndex: (int) idx;
+- (NSInteger ) numberOfSteps;
+- (NSString *) StepsTabBarTitle;
 
 
 @end
 
 
-@protocol DownloadReadyForUseDelegate <NSObject>
+@protocol DataSourceReadyForUseDelegate <NSObject>
 
 @optional
 

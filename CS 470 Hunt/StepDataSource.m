@@ -30,12 +30,12 @@
     return _steps;
 }
 
-- (instancetype) initWithStepsURL: (NSString *) hURL
+- (instancetype) initWithStepsURL: (NSString *) sURL
 {
     if( (self = [super init]) == nil )
         return nil;
     
-    self.stepsURLString = hURL;
+    self.stepsURLString = sURL;
     _debug = YES;
     
     _downloadAssistant = [[DownloadAssistant alloc]init];
@@ -49,13 +49,13 @@
     return self;
 }
 
-- (void) processHuntJSON
+- (void) processStepJSON
 {
     NSError *parseError = nil;
     NSArray *jsonString = [NSJSONSerialization JSONObjectWithData:self.stepsNSData options:0 error:&parseError];
     
     if( _debug )
-        NSLog( @"%@", jsonString );
+        NSLog( @"JSON string: %@", jsonString );
     
     if( parseError )
     {
@@ -63,13 +63,18 @@
         return;
     }
     
-    for( NSMutableDictionary *theaterTuple in jsonString )
+    for( NSMutableDictionary *stepTuple in jsonString )
     {
-        Step *step = [[Step alloc] initWithDictionary:theaterTuple];
+        Step *step = [[Step alloc] initWithDictionary:stepTuple];
+//        Step *step = [[Step alloc] init];
+//        [step.stepAttributes setDictionary:stepTuple];
+//        step.stepAttributes = [NSMutableDictionary dictionaryWithDictionary:stepTuple];
+//        NSLog( @"step attributes: %@", [step.stepAttributes valueForKey:@"description"]);
+        
         if( _debug )
             [step print];
         [self.steps addObject:step];
-        NSLog( @"num of hunts %lu", (unsigned long)[self.steps count] );
+        NSLog( @"num of steps %lu", (unsigned long)[self.steps count] );
     }
     
     self.stepsNSData = nil;
@@ -78,15 +83,13 @@
 //        [self.delegate performSelector: @selector(dataSourceReadyForUse:) withObject:self];
     
         
-//    if( [self.delegate respondsToSelector:@selecto(dataSourceReadyForUse:)] )
-//        [self.delegate performSelector:@selector(dataSourceReadyForUse:) withObject:self];
     
     
 }
 
 - (void) print
 {
-    NSLog( @"number of hunts %lu", (unsigned long)[self.steps count] );
+    NSLog( @"number of steps %lu", (unsigned long)[self.steps count] );
     for( Step *s in self.steps )
         [s print];
 }
@@ -94,9 +97,9 @@
 - (void) acceptWebData:(NSData *) webData forURL:(NSURL *) url
 {
     self.stepsNSData = webData;
-    [self processHuntJSON];
+    [self processStepJSON];
     [self print];
-    NSLog( @"completing printing hunts" );
+    NSLog( @"completing printing steps" );
     self.dataReadyForUse = YES;
     
 }
@@ -135,7 +138,7 @@
     return [self.steps count];
 }
 
-- (NSString *) HStepsTabBarTitle
+- (NSString *) StepsTabBarTitle
 {
     return @"Steps";
 }

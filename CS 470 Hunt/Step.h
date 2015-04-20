@@ -17,6 +17,8 @@
 - (void) addValue: (NSString *) attrVal forAttribute: (NSString *) attrName;
 - (NSString *) getValueForAttribute: (NSString *) attr;
 - (NSString *) title;
+- (NSInteger) getStepNumber;
+- (NSString *) getDescription;
 - (CGSize) sizeOfListEntryView;
 - (NSAttributedString *) compose: str withBoldPrefix: (NSString *) prefix;
 - (void) print;

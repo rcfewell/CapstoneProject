@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StepDataSource.h"
+#import "Step.h"
 
-@interface StepViewController : UIViewController
+
+@interface StepViewController : UIViewController<DataSourceReadyForUseDelegate>
 
 @property (nonatomic) NSString *huntName;
 

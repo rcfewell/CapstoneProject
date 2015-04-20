@@ -10,8 +10,11 @@
 
 @interface StepViewController ()
 
-//@property (nonatomic) NSString *huntName;
 @property (weak, nonatomic) IBOutlet UILabel *huntTitle;
+@property (nonatomic) StepDataSource *dataSource;
+@property (nonatomic) Step *step;
+@property(nonatomic) UIActivityIndicatorView *activityIndicator;
+
 
 
 @end
@@ -25,6 +28,8 @@
     if( (self = [super init]) == nil )
         return nil;
     self.huntName = [[NSString alloc] initWithString:title];
+    
+
         
     return self;
 }
@@ -34,6 +39,65 @@
     NSLog( @"In view did load" );
     NSLog( @"Title: %@", self.huntName );
     self.huntTitle.text = self.huntName;
+    
+    self.step = [[Step alloc]init];
+    
+    NSString *stepURLString = @"http://cs.sonoma.edu/~ppfeffer/470/pullData.py?rType=stepsInHunt&rHunt=";
+    stepURLString = [stepURLString stringByAppendingString:self.huntName];
+    stepURLString = [stepURLString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    self.dataSource = [[StepDataSource alloc] initWithStepsURL:stepURLString];
+    [self.dataSource setDelegate:self];
+    
+    
+    _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [self.activityIndicator setCenter: self.view.center];
+    [self.view addSubview: self.activityIndicator];
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    NSLog(@"description: %@", [self.step.stepAttributes valueForKey:@"description"] );
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+- (void) dataSourceReadyForUse:(StepDataSource *) dataSource
+{
+    [self.activityIndicator stopAnimating];
 }
 
 @end
+
+
+
+
+
+
+
+
+
+

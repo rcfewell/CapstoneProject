@@ -19,6 +19,8 @@ enum {VIEW_HEIGHT = 90};
     
     self.stepAttributes = [NSMutableDictionary dictionaryWithDictionary: dictionary];
     
+    
+//    NSLog( @"step attributes: %@", self.stepAttributes );
     return self;
 }
 
@@ -36,6 +38,18 @@ enum {VIEW_HEIGHT = 90};
 {
     return [self.stepAttributes valueForKey:@"name"];
     //    return [self.theatersAttrs valueForKey:@"movieTitle"];
+}
+
+- (NSInteger) getStepNumber
+{
+    return (int)[self.stepAttributes valueForKey:@"step" ];
+}
+
+- (NSString *) getDescription
+{
+    NSLog( @"description: %@", [self.stepAttributes valueForKey:@"description"] );
+//    return [self.stepAttributes valueForKey:@"description"];
+    return [self getValueForAttribute:@"description"];
 }
 
 - (CGSize) sizeOfListEntryView

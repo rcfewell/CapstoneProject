@@ -38,6 +38,7 @@ enum {VIEW_HEIGHT = 90};
     //    return [self.theatersAttrs valueForKey:@"movieTitle"];
 }
 
+
 - (CGSize) sizeOfListEntryView
 {
     CGRect bounds = [[UIScreen mainScreen] applicationFrame];

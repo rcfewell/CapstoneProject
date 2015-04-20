@@ -137,23 +137,8 @@ static NSString *tableCellViewID = @"Cell";
     Hunt *hunt = [self.huntDataSource huntAtIndex:[indexPath row]];
     self.hunts = [hunt title];
     
-    //    MovieTableViewController *mvc = [[MovieTableViewController alloc] init];
-    
-    //    theaterDetailedTableViewController *mvc = [[theaterDetailedTableViewController alloc] initWithTheater:self.theater];
-    //    theaterDetailedViewController *tvc = [[theaterDetailedViewController alloc] initWithTheater:(theaters *)self.theater];
-    //    [self.navigationController pushViewController:tvc animated:YES];
-    
-//    MoviesTableViewController *mvc = [[MoviesTableViewController alloc] initWithTheater:(theaters *)self.theater];
-//    [self.navigationController pushViewController:mvc animated:YES];
-//    HuntDetailViewController *hdvc = [[HuntDetailViewController alloc] init];
-  //  [self.navigationController pushViewController:hdvc animated:YES];
-    
-    
-//    StepViewController *svc = [self.storyboard instantiateViewControllerWithIdentifier:@"StepViewController"];
-//    StepViewController *svc = [[StepViewController alloc] initWithTitle:[hunt title]];
-//    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"MainStoryBoard" bundle:nil];
+
     StepViewController *svc = [self.storyboard instantiateViewControllerWithIdentifier:@"StepViewController"];
-//    [svc initWithTitle:[hunt title]];
     svc.huntName = [hunt title];
     [self.navigationController pushViewController:svc animated:YES];
     
