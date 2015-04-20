@@ -20,6 +20,8 @@
 		3FBFE0A01ADC79C0008C4971 /* HuntTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFE09F1ADC79C0008C4971 /* HuntTableViewController.m */; };
 		3FBFE0A31ADC7A36008C4971 /* HuntDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFE0A21ADC7A36008C4971 /* HuntDetailViewController.m */; };
 		3FBFE0A61ADC7A5D008C4971 /* Step.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFE0A51ADC7A5D008C4971 /* Step.m */; };
+		4DD422821AE4A965008A5A1D /* StepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DD422811AE4A965008A5A1D /* StepViewController.m */; };
+		4DD422851AE4B185008A5A1D /* StepDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DD422841AE4B185008A5A1D /* StepDataSource.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,10 @@
 		3FBFE0A21ADC7A36008C4971 /* HuntDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HuntDetailViewController.m; sourceTree = "<group>"; };
 		3FBFE0A41ADC7A5C008C4971 /* Step.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Step.h; sourceTree = "<group>"; };
 		3FBFE0A51ADC7A5D008C4971 /* Step.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Step.m; sourceTree = "<group>"; };
+		4DD422801AE4A965008A5A1D /* StepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StepViewController.h; sourceTree = "<group>"; };
+		4DD422811AE4A965008A5A1D /* StepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StepViewController.m; sourceTree = "<group>"; };
+		4DD422831AE4B185008A5A1D /* StepDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StepDataSource.h; sourceTree = "<group>"; };
+		4DD422841AE4B185008A5A1D /* StepDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StepDataSource.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,14 +113,18 @@
 				3FBFE09C1ADC7904008C4971 /* DownloadAssistant.m */,
 				3FBFE0951ADC74FC008C4971 /* Hunt.h */,
 				3FBFE0961ADC74FC008C4971 /* Hunt.m */,
-				3FBFE0A41ADC7A5C008C4971 /* Step.h */,
-				3FBFE0A51ADC7A5D008C4971 /* Step.m */,
 				3FBFE0981ADC787D008C4971 /* HuntDataSource.h */,
 				3FBFE0991ADC787D008C4971 /* HuntDataSource.m */,
 				3FBFE09E1ADC79C0008C4971 /* HuntTableViewController.h */,
 				3FBFE09F1ADC79C0008C4971 /* HuntTableViewController.m */,
 				3FBFE0A11ADC7A36008C4971 /* HuntDetailViewController.h */,
 				3FBFE0A21ADC7A36008C4971 /* HuntDetailViewController.m */,
+				3FBFE0A41ADC7A5C008C4971 /* Step.h */,
+				3FBFE0A51ADC7A5D008C4971 /* Step.m */,
+				4DD422831AE4B185008A5A1D /* StepDataSource.h */,
+				4DD422841AE4B185008A5A1D /* StepDataSource.m */,
+				4DD422801AE4A965008A5A1D /* StepViewController.h */,
+				4DD422811AE4A965008A5A1D /* StepViewController.m */,
 				3F28BCE41ADC49A300FCCEC1 /* Main.storyboard */,
 				3F28BCE71ADC49A300FCCEC1 /* Images.xcassets */,
 				3F28BCE91ADC49A300FCCEC1 /* LaunchScreen.xib */,
@@ -253,8 +263,10 @@
 				3FBFE0A61ADC7A5D008C4971 /* Step.m in Sources */,
 				3F28BCE31ADC49A200FCCEC1 /* ViewController.m in Sources */,
 				3FBFE0A01ADC79C0008C4971 /* HuntTableViewController.m in Sources */,
+				4DD422851AE4B185008A5A1D /* StepDataSource.m in Sources */,
 				3FBFE09D1ADC7904008C4971 /* DownloadAssistant.m in Sources */,
 				3FBFE09A1ADC787D008C4971 /* HuntDataSource.m in Sources */,
+				4DD422821AE4A965008A5A1D /* StepViewController.m in Sources */,
 				3F28BCE01ADC49A200FCCEC1 /* AppDelegate.m in Sources */,
 				3FBFE0A31ADC7A36008C4971 /* HuntDetailViewController.m in Sources */,
 				3F28BCDD1ADC49A200FCCEC1 /* main.m in Sources */,

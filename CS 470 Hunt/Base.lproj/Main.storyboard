@@ -197,10 +197,10 @@
             </objects>
             <point key="canvasLocation" x="738.66666666666663" y="167.56"/>
         </scene>
-        <!--View Controller-->
+        <!--Step View Controller-->
         <scene sceneID="tpa-q2-EiQ">
             <objects>
-                <viewController id="fkM-oV-d4n" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StepViewController" id="fkM-oV-d4n" customClass="StepViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eB5-Ni-5IN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -245,6 +245,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="DQ6-Oj-hnj"/>
+                    <connections>
+                        <outlet property="huntTitle" destination="MPa-IM-m3r" id="U0v-9x-f4O"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s0O-WT-eh5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

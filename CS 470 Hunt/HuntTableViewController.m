@@ -149,6 +149,15 @@ static NSString *tableCellViewID = @"Cell";
   //  [self.navigationController pushViewController:hdvc animated:YES];
     
     
+//    StepViewController *svc = [self.storyboard instantiateViewControllerWithIdentifier:@"StepViewController"];
+//    StepViewController *svc = [[StepViewController alloc] initWithTitle:[hunt title]];
+//    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"MainStoryBoard" bundle:nil];
+    StepViewController *svc = [self.storyboard instantiateViewControllerWithIdentifier:@"StepViewController"];
+//    [svc initWithTitle:[hunt title]];
+    svc.huntName = [hunt title];
+    [self.navigationController pushViewController:svc animated:YES];
+    
+    
 }
 
 

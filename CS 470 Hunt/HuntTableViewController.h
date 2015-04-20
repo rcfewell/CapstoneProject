@@ -11,6 +11,7 @@
 #import "HuntDataSource.h"
 #import "Hunt.h"
 #import "HuntDetailViewController.h"
+#import "StepViewController.h"
 
 @interface HuntTableViewController : UITableViewController<DataSourceReadyForUseDelegate, UITableViewDelegate, UITableViewDataSource>
 
