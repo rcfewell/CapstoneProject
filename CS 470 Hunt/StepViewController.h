@@ -9,12 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "StepDataSource.h"
 #import "Step.h"
+#import "Hunt.h"
 
 
 @interface StepViewController : UIViewController<DataSourceReadyForUseDelegate>
 
 @property (nonatomic) NSString *huntName;
+@property (nonatomic) Hunt *hunt;
 
-- (instancetype) initWithTitle: (NSString *) title;
+//- (instancetype) initWithTitle: (NSString *) title;
+- (instancetype) initWithHunt: (Hunt *) hunt;
 
 @end

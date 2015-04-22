@@ -59,6 +59,7 @@ static NSString *tableCellViewID = @"Cell";
     
     
     
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -99,10 +100,9 @@ static NSString *tableCellViewID = @"Cell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:tableCellViewID];
-    //    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:tableViewCellID forIndexPath:indexPath];
-    //    cell.selectionStyle = UITableViewCellStyleSubtitle;
-    
+//    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:tableCellViewID];
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:tableCellViewID forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellStyleSubtitle;
     
     
     
@@ -110,11 +110,15 @@ static NSString *tableCellViewID = @"Cell";
     // Configure the cell...
     
     cell.textLabel.text = [hunt title];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.backgroundColor = [UIColor clearColor];
+    cell.layer.opacity = 0.5;
 //    NSString *city = @"City: ";
 //    NSString *cityTitle = [city stringByAppendingString:[movieTheater cityTitle]];
 //    cell.detailTextLabel.text = cityTitle;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     NSLog( @"%@", [hunt title] );
+    
     
     return cell;
 }
@@ -139,9 +143,11 @@ static NSString *tableCellViewID = @"Cell";
     
 
     StepViewController *svc = [self.storyboard instantiateViewControllerWithIdentifier:@"StepViewController"];
-    svc.huntName = [hunt title];
-    [self.navigationController pushViewController:svc animated:YES];
+//    svc.huntName = [hunt title];
+    svc.hunt = hunt;
     
+    
+    [self.navigationController pushViewController:svc animated:YES];
     
 }
 

@@ -20,6 +20,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     [self.huntsButton setTitle:@"Hunts" forState:UIControlStateNormal];
+    self.huntsButton.layer.borderColor = [UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:0.40].CGColor;
+        self.createButton.layer.borderColor = [UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:0.40].CGColor;
+    
 }
 
 - (IBAction)didPressHuntsButton:(UIButton *)sender

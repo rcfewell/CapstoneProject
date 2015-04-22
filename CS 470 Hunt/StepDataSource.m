@@ -63,13 +63,12 @@
         return;
     }
     
+    
+    
     for( NSMutableDictionary *stepTuple in jsonString )
     {
         Step *step = [[Step alloc] initWithDictionary:stepTuple];
-//        Step *step = [[Step alloc] init];
-//        [step.stepAttributes setDictionary:stepTuple];
-//        step.stepAttributes = [NSMutableDictionary dictionaryWithDictionary:stepTuple];
-//        NSLog( @"step attributes: %@", [step.stepAttributes valueForKey:@"description"]);
+
         
         if( _debug )
             [step print];
@@ -79,8 +78,8 @@
     
     self.stepsNSData = nil;
     
-//    if( [self.delegate respondsToSelector: @selector(dataSourceReadyForUse:)])
-//        [self.delegate performSelector: @selector(dataSourceReadyForUse:) withObject:self];
+    if( [self.delegate respondsToSelector: @selector(dataSourceReadyForUse:)])
+        [self.delegate performSelector: @selector(dataSourceReadyForUse:) withObject:self];
     
         
     
@@ -100,6 +99,10 @@
     [self processStepJSON];
     [self print];
     NSLog( @"completing printing steps" );
+    
+//    if( [self.delegate respondsToSelector: @selector(dataSourceReadyForUse:)])
+//        [self.delegate performSelector: @selector(dataSourceReadyForUse:) withObject:self];
+    
     self.dataReadyForUse = YES;
     
 }
