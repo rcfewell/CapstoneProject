@@ -47,7 +47,8 @@
     NSLog( @"In view did load" );
     NSLog( @"Title: %@", self.huntName );
     self.huntTitle.text = self.huntName;
-    [self.huntTitle setTextColor:[UIColor whiteColor]];
+//    [self.huntTitle setTextColor:[UIColor whiteColor]];
+    [self.huntTitle setTextColor:[UIColor colorWithRed:(98.0/255.0) green:(90.0/255.0) blue:(90.0/255.0) alpha:1.0]];
     
     
     NSString *hName = [self.hunt title];
@@ -97,7 +98,7 @@
 //            self.stepCount.text = [NSString stringWithFormat:@"No Available steps for this hunt"];
     
     self.stepCount.text = [NSString stringWithFormat:@"Step %@", [self.step getStepNumber]];
-    [self.stepCount setTextColor:[UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:.54]];
+    [self.stepCount setTextColor:[UIColor colorWithRed:(98.0/255.0) green:(90.0/255.0) blue:(90.0/255.0) alpha:.75]];
     [self setUpOptionalDescription];
     
     
@@ -106,11 +107,11 @@
 - (void) setUpOptionalDescription
 {
     self.optionalText.text = [NSString stringWithFormat:@"Hint:\n %@", [self.step getDescription]];//[self.step getDescription];
-    self.optionalText.layer.borderWidth = 1;
+//    self.optionalText.layer.borderWidth = 1;
     self.optionalText.layer.cornerRadius = 2;
     
-    self.optionalText.layer.borderColor = [UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:0.40].CGColor;
-    [self.optionalText setTextColor:[UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:0.40]];
+//    self.optionalText.layer.borderColor = [UIColor colorWithRed:(98.0/255.0) green:(90.0/255.0) blue:(90.0/255.0) alpha:0.75].CGColor;
+    [self.optionalText setTextColor:[UIColor colorWithRed:(98.0/255.0) green:(90.0/255.0) blue:(90.0/255.0) alpha:0.75]];
     [self addImage];
     
     
@@ -120,10 +121,11 @@
 
 - (void) addImage
 {
-    self.stepImage.layer.borderWidth = 1;
-    self.stepImage.layer.borderColor = [UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:0.26].CGColor;
+//    self.stepImage.layer.borderWidth = 1;
+//    self.stepImage.layer.borderColor = [UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:0.26].CGColor;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://%@", [self.step getImageURL]];
+//    NSString *urlString = [NSString stringWithFormat:@"http://%@", [self.step getImageURL]];
+    NSString *urlString = [NSString stringWithFormat:@"%@", [self.step getImageURL]];
 //    NSURL *stepURLPath = [NSURL URLWithString:urlString];
 //
 //    
@@ -131,7 +133,8 @@
 //    UIImage *urlImage = [UIImage imageWithData:urlData];
 ////    UIImage *urlImage = [UIImage imageWithContentsOfFile:urlString];
     
-    self.stepImage.image = [UIImage imageNamed:@"loading_image.jpg"];
+//    self.stepImage.image = [UIImage imageNamed:@"loading_compass.png"];
+    
   
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];

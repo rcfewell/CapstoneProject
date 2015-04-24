@@ -38,6 +38,16 @@ enum {VIEW_HEIGHT = 90};
     //    return [self.theatersAttrs valueForKey:@"movieTitle"];
 }
 
+- (NSString *) getImageURL
+{
+    return [self getValueForAttribute: @"urlPath" ];
+}
+
+- (NSString *) getDate
+{
+    return [self getValueForAttribute:@"date"];
+}
+
 
 - (CGSize) sizeOfListEntryView
 {

@@ -18,6 +18,8 @@
 
 @end
 
+enum { MOVIE_VIEW_HEIGHT = 90, GAP_BTWN_VIEWS = 5, IMAGE_HEIGHT = 80, IMAGE_WIDTH = 80 };
+
 static NSString *tableCellViewID = @"Cell";
 
 @implementation HuntTableViewController
@@ -37,7 +39,8 @@ static NSString *tableCellViewID = @"Cell";
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:tableCellViewID];
     
-    NSString *huntURLString = @"http://cs.sonoma.edu/~ppfeffer/470/pullData.py?rType=allHunts";
+//    NSString *huntURLString = @"http://cs.sonoma.edu/~ppfeffer/470/pullData.py?rType=allHunts";
+    NSString *huntURLString = @"http://cs.sonoma.edu/~ppfeffer/470/pullData.py?rType=huntsWithImage";
     
 
     
@@ -100,27 +103,79 @@ static NSString *tableCellViewID = @"Cell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-//    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:tableCellViewID];
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:tableCellViewID forIndexPath:indexPath];
-        cell.selectionStyle = UITableViewCellStyleSubtitle;
-    
-    
-    
-    Hunt *hunt = [self.huntDataSource huntAtIndex:[indexPath row]];
-    // Configure the cell...
-    
-    cell.textLabel.text = [hunt title];
-    cell.textLabel.textColor = [UIColor whiteColor];
-    cell.backgroundColor = [UIColor clearColor];
-    cell.layer.opacity = 0.5;
-//    NSString *city = @"City: ";
-//    NSString *cityTitle = [city stringByAppendingString:[movieTheater cityTitle]];
-//    cell.detailTextLabel.text = cityTitle;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    NSLog( @"%@", [hunt title] );
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:tableCellViewID];
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:tableCellViewID forIndexPath:indexPath];
+
+    cell = [self huntViewForIndex:[indexPath row] withTableViewCell:cell];
     
     
     return cell;
+}
+
+-(UITableViewCell *) huntViewForIndex: (NSInteger) rowIndex withTableViewCell: (UITableViewCell *) cell
+{
+    
+    cell.selectionStyle = UITableViewCellStyleSubtitle;
+
+//    enum {IMAGE_VIEW_TAG = 20, MAIN_VIEW_TAG = 50, LABEL_TAG = 30};
+    
+    
+    
+    Hunt *hunt = [self.huntDataSource huntAtIndex:(long)rowIndex];
+    // Configure the cell...
+    
+//    UIView *view = [cell viewWithTag: MAIN_VIEW_TAG];
+    
+//    if( view ) {
+//        UIImageView *iv = (UIImageView *)[view viewWithTag: IMAGE_VIEW_TAG];
+//        NSArray *views = [iv subviews];
+//        for( UIView *v in views )
+//            [v removeFromSuperview];
+//        iv.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[hunt getImageURL]]]];
+    
+//        UILabel *aLabel = (UILabel *) [view viewWithTag: LABEL_TAG];
+//        aLabel.attributedText = [hunt descriptionForListEntry];
+//        return cell;
+//    }
+    
+//    CGRect bounds = [[UIScreen mainScreen] applicationFrame];
+//    CGRect viewFrame = CGRectMake(0, 0, bounds.size.width, MOVIE_VIEW_HEIGHT);
+    
+//    UIView *thisView = [[UIView alloc] initWithFrame: viewFrame];
+    
+//    UIImage *img = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[hunt getImageURL]]]];
+//    CGRect imgFrame = CGRectMake(10, (viewFrame.size.height - IMAGE_HEIGHT) / 2, IMAGE_WIDTH, IMAGE_HEIGHT );
+//    UIImageView *iView = [[UIImageView alloc] initWithImage: img];
+//    iView.tag = IMAGE_VIEW_TAG;
+//    iView.frame = imgFrame;
+//    [thisView addSubview: iView];
+    
+//    UILabel *movieInfoLabel = [[UILabel alloc]
+//                               initWithFrame:CGRectMake(IMAGE_WIDTH + 2 * 10, 5,
+//                                                        viewFrame.size.width - IMAGE_WIDTH - 10,
+//                                                        viewFrame.size.height -5)];
+    
+    cell.textLabel.text = [hunt title];
+//    cell.textLabel.textColor = [UIColor blackColor];
+//    cell.backgroundColor = [UIColor clearColor];
+//    cell.layer.opacity = 1.0;
+
+    NSString *date = [hunt getDate];
+    cell.detailTextLabel.textColor = [UIColor blackColor];
+    cell.detailTextLabel.text = date;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    NSLog( @"%@", [hunt title] );
+    
+//    movieInfoLabel.tag = LABEL_TAG;
+//    NSAttributedString *desc = [movie descriptionForListEntry];
+//    movieInfoLabel.attributedText = desc;
+//    movieInfoLabel.numberOfLines = 0;
+//    [thisView addSubview: movieInfoLabel];
+//    thisView.tag = MAIN_VIEW_TAG;
+//    [[cell contentView] addSubview:thisView];
+    
+    return cell;
+    
 }
 
 - (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath

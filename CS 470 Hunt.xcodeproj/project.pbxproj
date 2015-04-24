@@ -23,6 +23,9 @@
 		4D19AB711AE744D5001A4049 /* loading_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D19AB701AE744D5001A4049 /* loading_image.jpg */; };
 		4DD422821AE4A965008A5A1D /* StepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DD422811AE4A965008A5A1D /* StepViewController.m */; };
 		4DD422851AE4B185008A5A1D /* StepDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DD422841AE4B185008A5A1D /* StepDataSource.m */; };
+		4DFE2C681AEAB80900C2F0B8 /* compass.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4DFE2C671AEAB80900C2F0B8 /* compass.jpg */; };
+		4DFE2C6A1AEAD33B00C2F0B8 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4DFE2C691AEAD33B00C2F0B8 /* background.jpg */; };
+		4DFE2C701AEAE30600C2F0B8 /* loading_compass.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DFE2C6F1AEAE30600C2F0B8 /* loading_compass.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +69,9 @@
 		4DD422811AE4A965008A5A1D /* StepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StepViewController.m; sourceTree = "<group>"; };
 		4DD422831AE4B185008A5A1D /* StepDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StepDataSource.h; sourceTree = "<group>"; };
 		4DD422841AE4B185008A5A1D /* StepDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StepDataSource.m; sourceTree = "<group>"; };
+		4DFE2C671AEAB80900C2F0B8 /* compass.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = compass.jpg; sourceTree = "<group>"; };
+		4DFE2C691AEAD33B00C2F0B8 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
+		4DFE2C6F1AEAE30600C2F0B8 /* loading_compass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading_compass.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +144,9 @@
 		3F28BCDA1ADC49A200FCCEC1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4DFE2C6F1AEAE30600C2F0B8 /* loading_compass.png */,
+				4DFE2C691AEAD33B00C2F0B8 /* background.jpg */,
+				4DFE2C671AEAB80900C2F0B8 /* compass.jpg */,
 				4D19AB701AE744D5001A4049 /* loading_image.jpg */,
 				3F28BCDB1ADC49A200FCCEC1 /* Info.plist */,
 				3F28BCDC1ADC49A200FCCEC1 /* main.m */,
@@ -245,7 +254,10 @@
 				4D19AB711AE744D5001A4049 /* loading_image.jpg in Resources */,
 				3F28BCE61ADC49A300FCCEC1 /* Main.storyboard in Resources */,
 				3F28BCEB1ADC49A300FCCEC1 /* LaunchScreen.xib in Resources */,
+				4DFE2C6A1AEAD33B00C2F0B8 /* background.jpg in Resources */,
 				3F28BCE81ADC49A300FCCEC1 /* Images.xcassets in Resources */,
+				4DFE2C701AEAE30600C2F0B8 /* loading_compass.png in Resources */,
+				4DFE2C681AEAB80900C2F0B8 /* compass.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
