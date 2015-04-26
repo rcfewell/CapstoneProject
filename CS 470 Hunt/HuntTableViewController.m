@@ -60,6 +60,14 @@ static NSString *tableCellViewID = @"Cell";
 
     self.title = @"Hunts";
     
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.jpg"]];
+    [self.tableView setBackgroundColor:[UIColor whiteColor]];
+    
+    [self.tableView setBackgroundView:imageView];
+    self.tableView.backgroundView.alpha = 0.5;
+    
+                                 
+    
     
     
     
@@ -116,63 +124,28 @@ static NSString *tableCellViewID = @"Cell";
 {
     
     cell.selectionStyle = UITableViewCellStyleSubtitle;
-
-//    enum {IMAGE_VIEW_TAG = 20, MAIN_VIEW_TAG = 50, LABEL_TAG = 30};
-    
-    
-    
-    Hunt *hunt = [self.huntDataSource huntAtIndex:(long)rowIndex];
+   
+    Hunt *hunt = [self.huntDataSource huntAtIndex:rowIndex];
     // Configure the cell...
-    
-//    UIView *view = [cell viewWithTag: MAIN_VIEW_TAG];
-    
-//    if( view ) {
-//        UIImageView *iv = (UIImageView *)[view viewWithTag: IMAGE_VIEW_TAG];
-//        NSArray *views = [iv subviews];
-//        for( UIView *v in views )
-//            [v removeFromSuperview];
-//        iv.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[hunt getImageURL]]]];
-    
-//        UILabel *aLabel = (UILabel *) [view viewWithTag: LABEL_TAG];
-//        aLabel.attributedText = [hunt descriptionForListEntry];
-//        return cell;
-//    }
-    
-//    CGRect bounds = [[UIScreen mainScreen] applicationFrame];
-//    CGRect viewFrame = CGRectMake(0, 0, bounds.size.width, MOVIE_VIEW_HEIGHT);
-    
-//    UIView *thisView = [[UIView alloc] initWithFrame: viewFrame];
-    
-//    UIImage *img = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[hunt getImageURL]]]];
-//    CGRect imgFrame = CGRectMake(10, (viewFrame.size.height - IMAGE_HEIGHT) / 2, IMAGE_WIDTH, IMAGE_HEIGHT );
-//    UIImageView *iView = [[UIImageView alloc] initWithImage: img];
-//    iView.tag = IMAGE_VIEW_TAG;
-//    iView.frame = imgFrame;
-//    [thisView addSubview: iView];
-    
-//    UILabel *movieInfoLabel = [[UILabel alloc]
-//                               initWithFrame:CGRectMake(IMAGE_WIDTH + 2 * 10, 5,
-//                                                        viewFrame.size.width - IMAGE_WIDTH - 10,
-//                                                        viewFrame.size.height -5)];
-    
+
+
+   
     cell.textLabel.text = [hunt title];
-//    cell.textLabel.textColor = [UIColor blackColor];
-//    cell.backgroundColor = [UIColor clearColor];
-//    cell.layer.opacity = 1.0;
+    cell.textLabel.textColor = [UIColor blackColor];
+    cell.backgroundColor = [UIColor clearColor];
+    cell.layer.opacity = 1.0;
 
     NSString *date = [hunt getDate];
     cell.detailTextLabel.textColor = [UIColor blackColor];
     cell.detailTextLabel.text = date;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    NSLog( @"%@", [hunt title] );
+    cell.indentationLevel = 1;
+    cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[hunt getImageURL]]]];
+//    cell.imageView.frame = CGRectMake(0, 0, 32, 32);
+//    cell.imageView.layer.cornerRadius = 15.0f;
+//    NSLog( @"%@", [hunt title] );
     
-//    movieInfoLabel.tag = LABEL_TAG;
-//    NSAttributedString *desc = [movie descriptionForListEntry];
-//    movieInfoLabel.attributedText = desc;
-//    movieInfoLabel.numberOfLines = 0;
-//    [thisView addSubview: movieInfoLabel];
-//    thisView.tag = MAIN_VIEW_TAG;
-//    [[cell contentView] addSubview:thisView];
+
     
     return cell;
     
@@ -198,12 +171,16 @@ static NSString *tableCellViewID = @"Cell";
     
 
     StepViewController *svc = [self.storyboard instantiateViewControllerWithIdentifier:@"StepViewController"];
-//    svc.huntName = [hunt title];
     svc.hunt = hunt;
     
     
     [self.navigationController pushViewController:svc animated:YES];
     
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 85;
 }
 
 
