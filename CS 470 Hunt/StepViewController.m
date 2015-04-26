@@ -8,6 +8,7 @@
 
 #import "StepViewController.h"
 
+
 @interface StepViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *huntTitle;
@@ -22,10 +23,11 @@
 
 @property (nonatomic) BOOL dataReady;
 
+@property (nonatomic,strong) CLLocationManager *locationManager;
 
 
 @end
-
+        
 @implementation StepViewController
 
 @synthesize stepImage;
@@ -69,7 +71,6 @@
     [self.activityIndicator setCenter: self.view.center];
     [self.view addSubview: self.activityIndicator];
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
     
     
     
@@ -121,7 +122,6 @@
 - (void) addImage
 {
 
-    
     NSString *urlString = [NSString stringWithFormat:@"%@", [self.step getImageURL]];
 
 //    NSData *urlData = [NSData dataWithContentsOfURL:stepURLPath];
@@ -142,21 +142,68 @@
                 
                 if( urlImage )
                     self.stepImage.image = urlImage;
-                else
-                    self.stepImage.image = [UIImage imageNamed:@"loading_image.jpg"];
             }
-            else
-                self.stepImage.image = [UIImage imageNamed:@"loading_image.jpg"];
+//                else
+//                    self.stepImage.image = [UIImage imageNamed:@"loading_image.jpg"];
+//            }
+//            else
+//                self.stepImage.image = [UIImage imageNamed:@"loading_image.jpg"];
             
         });
     });
     
     
-    
+    [self startLocationManager];
+
     
     
 }
+
+
+/* This is from http://stackoverflow.com/questions/6894624/how-can-i-get-gps-location-in-iphone 
+ It is an attempt to get the users current location.. This will be used to see if user is in vicinity of photo
+ */
+-(void)startLocationManager
+{
+        NSLog(@"Called start location manager");
+    if ([CLLocationManager locationServicesEnabled]) {
+        self.locationManager = [[CLLocationManager alloc] init];
+        self.locationManager.delegate = self;
+        [self.locationManager startUpdatingLocation];
+    } else {
+        NSLog(@"Location services are not enabled");
+        return;
+    }
+    
+
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self.locationManager requestAlwaysAuthorization];
+    }
+    
+    self.locationManager.desiredAccuracy=kCLLocationAccuracyBest;
+    [self.locationManager startMonitoringSignificantLocationChanges];
+    self.locationManager.distanceFilter=kCLDistanceFilterNone;
+    [self.locationManager startUpdatingLocation];
+
+    //
+//    CLLocation *newLocation = [[CLLocation alloc] initWithLatitude:0 longitude:0];
+//    CLLocation *oldLocation = [[CLLocation alloc] initWithLatitude:100 longitude:100];
+//    [self locationManager:self.locationManager didUpdateLocations:newLocation fromLocation:oldLocation];
+    
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+//    CLLocationCoordinate2D coordinate = [newLocation coordinate];
+//    double dblLatitude = coordinate.latitude;
+//    double dblLongitude = coordinate.longitude;
+
+    NSLog(@"didUpdateToLocation: %@", newLocation);
+
+}
+
 @end
+
 
 
 

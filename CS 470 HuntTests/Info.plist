@@ -18,7 +18,15 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>1</string>
+	<key>NSLocationUsageDescription</key>
+	<string>I need Location</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>I need Location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>I need Location</string>
+	<key>privacy - location usage description</key>
+	<string>I need Location</string>
 </dict>
 </plist>

@@ -39,8 +39,8 @@ static NSString *tableCellViewID = @"Cell";
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:tableCellViewID];
     
-//    NSString *huntURLString = @"http://cs.sonoma.edu/~ppfeffer/470/pullData.py?rType=allHunts";
-    NSString *huntURLString = @"http://cs.sonoma.edu/~ppfeffer/470/pullData.py?rType=huntsWithImage";
+    NSString *huntURLString = @"http://cs.sonoma.edu/~ppfeffer/470/pullData.py?rType=allHunts";
+//    NSString *huntURLString = @"http://cs.sonoma.edu/~ppfeffer/470/pullData.py?rType=huntsWithImage";
     
 
     

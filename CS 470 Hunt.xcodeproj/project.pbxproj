@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F1FFB731AED9470005B38A3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F1FFB721AED9470005B38A3 /* CoreLocation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		3F28BCDD1ADC49A200FCCEC1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F28BCDC1ADC49A200FCCEC1 /* main.m */; };
 		3F28BCE01ADC49A200FCCEC1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F28BCDF1ADC49A200FCCEC1 /* AppDelegate.m */; };
 		3F28BCE31ADC49A200FCCEC1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F28BCE21ADC49A200FCCEC1 /* ViewController.m */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F1FFB721AED9470005B38A3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3F28BCD71ADC49A200FCCEC1 /* CS 470 Hunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CS 470 Hunt.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F28BCDB1ADC49A200FCCEC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F28BCDC1ADC49A200FCCEC1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F1FFB731AED9470005B38A3 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +98,7 @@
 		3F28BCCE1ADC49A200FCCEC1 = {
 			isa = PBXGroup;
 			children = (
+				3F1FFB721AED9470005B38A3 /* CoreLocation.framework */,
 				3F28BCD91ADC49A200FCCEC1 /* CS 470 Hunt */,
 				3F28BCF31ADC49A300FCCEC1 /* CS 470 HuntTests */,
 				3F28BCD81ADC49A200FCCEC1 /* Products */,
@@ -410,6 +414,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "CS 470 Hunt/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -420,6 +425,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "CS 470 Hunt/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

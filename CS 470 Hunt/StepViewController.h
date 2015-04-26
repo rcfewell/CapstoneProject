@@ -10,9 +10,12 @@
 #import "StepDataSource.h"
 #import "Step.h"
 #import "Hunt.h"
+#import <CoreLocation/CoreLocation.h>
+
+//@protocol CLLocationManagerDelegate;
 
 
-@interface StepViewController : UIViewController<DataSourceReadyForUseDelegate>
+@interface StepViewController : UIViewController<CLLocationManagerDelegate>
 
 @property (nonatomic) NSString *huntName;
 @property (nonatomic) Hunt *hunt;
@@ -21,3 +24,4 @@
 - (instancetype) initWithHunt: (Hunt *) hunt;
 
 @end
+
