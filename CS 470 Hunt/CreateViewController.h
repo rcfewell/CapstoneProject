@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CreateDataSource.h"
 
-@interface CreateViewController : UIViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface CreateViewController : UIViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITextViewDelegate, UIAlertViewDelegate>
 
 @end
