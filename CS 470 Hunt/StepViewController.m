@@ -213,8 +213,6 @@
     
     CLLocation *currentLocation = newLocation;
     NSLog(@"%@", currentLocation);
-    NSLog(@"%@", @(currentLocation.coordinate.longitude));
-    NSLog(@"%@", @(currentLocation.coordinate.latitude));
 
     [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
         
