@@ -11,6 +11,8 @@
 
 @interface StepViewController ()
 
+
+
 @property (weak, nonatomic) IBOutlet UILabel *huntTitle;
 @property (weak, nonatomic) IBOutlet UILabel *stepCount;
 @property (weak, nonatomic) IBOutlet UIImageView *stepImage;
@@ -23,7 +25,7 @@
 
 @property (nonatomic) BOOL dataReady;
 
-@property (nonatomic,strong) CLLocationManager *locationManager;
+//@property (nonatomic,strong) CLLocationManager *locationManager;
 
 
 @end
@@ -72,8 +74,12 @@
     [self.view addSubview: self.activityIndicator];
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    
-    
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+    locationManager.distanceFilter = kCLDistanceFilterNone;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [locationManager startUpdatingLocation];
+//    locationManager.location
     
     
     
@@ -151,9 +157,6 @@
             
         });
     });
-    
-    
-    [self startLocationManager];
 
     
     
@@ -163,34 +166,34 @@
 /* This is from http://stackoverflow.com/questions/6894624/how-can-i-get-gps-location-in-iphone 
  It is an attempt to get the users current location.. This will be used to see if user is in vicinity of photo
  */
--(void)startLocationManager
-{
-        NSLog(@"Called start location manager");
-    if ([CLLocationManager locationServicesEnabled]) {
-        self.locationManager = [[CLLocationManager alloc] init];
-        self.locationManager.delegate = self;
-        [self.locationManager startUpdatingLocation];
-    } else {
-        NSLog(@"Location services are not enabled");
-        return;
-    }
-    
-
-    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-        [self.locationManager requestAlwaysAuthorization];
-    }
-    
-    self.locationManager.desiredAccuracy=kCLLocationAccuracyBest;
-    [self.locationManager startMonitoringSignificantLocationChanges];
-    self.locationManager.distanceFilter=kCLDistanceFilterNone;
-    [self.locationManager startUpdatingLocation];
-
-    //
-//    CLLocation *newLocation = [[CLLocation alloc] initWithLatitude:0 longitude:0];
-//    CLLocation *oldLocation = [[CLLocation alloc] initWithLatitude:100 longitude:100];
-//    [self locationManager:self.locationManager didUpdateLocations:newLocation fromLocation:oldLocation];
-    
-}
+//-(void)startLocationManager
+//{
+//        NSLog(@"Called start location manager");
+//    if ([CLLocationManager locationServicesEnabled]) {
+//        self.locationManager = [[CLLocationManager alloc] init];
+//        self.locationManager.delegate = self;
+//        [self.locationManager startUpdatingLocation];
+//    } else {
+//        NSLog(@"Location services are not enabled");
+//        return;
+//    }
+//    
+//
+//    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+//        [self.locationManager requestAlwaysAuthorization];
+//    }
+//    
+//    self.locationManager.desiredAccuracy=kCLLocationAccuracyBest;
+//    [self.locationManager startMonitoringSignificantLocationChanges];
+//    self.locationManager.distanceFilter=kCLDistanceFilterNone;
+//    [self.locationManager startUpdatingLocation];
+//
+//    //
+////    CLLocation *newLocation = [[CLLocation alloc] initWithLatitude:0 longitude:0];
+////    CLLocation *oldLocation = [[CLLocation alloc] initWithLatitude:100 longitude:100];
+////    [self locationManager:self.locationManager didUpdateLocations:newLocation fromLocation:oldLocation];
+//    
+//}
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {

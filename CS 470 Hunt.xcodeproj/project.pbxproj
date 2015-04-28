@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3F1FFB731AED9470005B38A3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F1FFB721AED9470005B38A3 /* CoreLocation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		3F20B4D21AEF0F2100230D4E /* CreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F20B4D11AEF0F2100230D4E /* CreateViewController.m */; };
 		3F28BCDD1ADC49A200FCCEC1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F28BCDC1ADC49A200FCCEC1 /* main.m */; };
 		3F28BCE01ADC49A200FCCEC1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F28BCDF1ADC49A200FCCEC1 /* AppDelegate.m */; };
 		3F28BCE31ADC49A200FCCEC1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F28BCE21ADC49A200FCCEC1 /* ViewController.m */; };
@@ -41,6 +42,8 @@
 
 /* Begin PBXFileReference section */
 		3F1FFB721AED9470005B38A3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		3F20B4D01AEF0F2100230D4E /* CreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateViewController.h; sourceTree = "<group>"; };
+		3F20B4D11AEF0F2100230D4E /* CreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateViewController.m; sourceTree = "<group>"; };
 		3F28BCD71ADC49A200FCCEC1 /* CS 470 Hunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CS 470 Hunt.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F28BCDB1ADC49A200FCCEC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F28BCDC1ADC49A200FCCEC1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -137,6 +140,8 @@
 				4DD422841AE4B185008A5A1D /* StepDataSource.m */,
 				4DD422801AE4A965008A5A1D /* StepViewController.h */,
 				4DD422811AE4A965008A5A1D /* StepViewController.m */,
+				3F20B4D01AEF0F2100230D4E /* CreateViewController.h */,
+				3F20B4D11AEF0F2100230D4E /* CreateViewController.m */,
 				3F28BCE41ADC49A300FCCEC1 /* Main.storyboard */,
 				3F28BCE71ADC49A300FCCEC1 /* Images.xcassets */,
 				3F28BCE91ADC49A300FCCEC1 /* LaunchScreen.xib */,
@@ -287,6 +292,7 @@
 				3FBFE09D1ADC7904008C4971 /* DownloadAssistant.m in Sources */,
 				3FBFE09A1ADC787D008C4971 /* HuntDataSource.m in Sources */,
 				4DD422821AE4A965008A5A1D /* StepViewController.m in Sources */,
+				3F20B4D21AEF0F2100230D4E /* CreateViewController.m in Sources */,
 				3F28BCE01ADC49A200FCCEC1 /* AppDelegate.m in Sources */,
 				3FBFE0A31ADC7A36008C4971 /* HuntDetailViewController.m in Sources */,
 				3F28BCDD1ADC49A200FCCEC1 /* main.m in Sources */,
@@ -414,7 +420,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "CS 470 Hunt/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -425,7 +431,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "CS 470 Hunt/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

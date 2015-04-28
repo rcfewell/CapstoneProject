@@ -15,7 +15,10 @@
 //@protocol CLLocationManagerDelegate;
 
 
-@interface StepViewController : UIViewController<CLLocationManagerDelegate>
+@interface StepViewController : UIViewController<CLLocationManagerDelegate>{
+    CLLocationManager *locationManager;
+
+}
 
 @property (nonatomic) NSString *huntName;
 @property (nonatomic) Hunt *hunt;
