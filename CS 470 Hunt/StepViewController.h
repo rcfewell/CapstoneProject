@@ -17,8 +17,10 @@
 
 @interface StepViewController : UIViewController<CLLocationManagerDelegate>{
     CLLocationManager *locationManager;
-
+    CLGeocoder *geocoder;
+    CLPlacemark *placemark;
 }
+@property (strong, nonatomic) CLLocationManager *locationManager;
 
 @property (nonatomic) NSString *huntName;
 @property (nonatomic) Hunt *hunt;

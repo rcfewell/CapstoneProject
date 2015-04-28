@@ -25,7 +25,6 @@
 
 @property (nonatomic) BOOL dataReady;
 
-//@property (nonatomic,strong) CLLocationManager *locationManager;
 
 
 @end
@@ -33,6 +32,7 @@
 @implementation StepViewController
 
 @synthesize stepImage;
+@synthesize locationManager;
 
 
 
@@ -74,15 +74,19 @@
     [self.view addSubview: self.activityIndicator];
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    locationManager = [[CLLocationManager alloc] init];
-    locationManager.delegate = self;
-    locationManager.distanceFilter = kCLDistanceFilterNone;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    [locationManager startUpdatingLocation];
-//    locationManager.location
-    
-    
-    
+    //-----------------------------------------------
+    //          Set up location stuff
+    self.locationManager = [[CLLocationManager alloc] init];
+    geocoder = [[CLGeocoder alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+    {
+        [self.locationManager requestAlwaysAuthorization];
+    }
+    [self.locationManager startUpdatingLocation];
+    //-----------------------------------------------
+
 }
 
 - (void) dataSourceReadyForUse:(StepDataSource *) dataSource
@@ -194,17 +198,47 @@
 ////    [self locationManager:self.locationManager didUpdateLocations:newLocation fromLocation:oldLocation];
 //    
 //}
-
--(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+//
+//-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+//{
+////    CLLocationCoordinate2D coordinate = [newLocation coordinate];
+////    double dblLatitude = coordinate.latitude;
+////    double dblLongitude = coordinate.longitude;
+//
+//    NSLog(@"didUpdateToLocation: %@", newLocation);
+//
+//}
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-//    CLLocationCoordinate2D coordinate = [newLocation coordinate];
-//    double dblLatitude = coordinate.latitude;
-//    double dblLongitude = coordinate.longitude;
+    
+    CLLocation *currentLocation = newLocation;
+    NSLog(@"%@", currentLocation);
+    NSLog(@"%@", @(currentLocation.coordinate.longitude));
+    NSLog(@"%@", @(currentLocation.coordinate.latitude));
 
-    NSLog(@"didUpdateToLocation: %@", newLocation);
-
+    [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+        
+        if (error == nil && [placemarks count] > 0) {
+            placemark = [placemarks lastObject];
+            NSLog(@"Longitude %@", @(currentLocation.coordinate.longitude));
+            NSLog(@"Latitude %@", @(currentLocation.coordinate.latitude));
+            NSLog(@"Country: %@", placemark.country);
+            NSLog(@"Area: %@", placemark.administrativeArea);
+            NSLog(@"City: %@", placemark.locality);
+            NSLog(@"Code: %@", placemark.postalCode);
+            NSLog(@"Road: %@", placemark.thoroughfare);
+            NSLog(@"Number: %@", placemark.subThoroughfare);
+            
+            //            // Stop Location Manager
+            //            [self.locationManager stopUpdatingLocation];
+            
+        } else {
+            NSLog(@"%@", error.debugDescription);
+            [self.locationManager stopUpdatingLocation];
+            
+        }
+    }];
 }
-
 @end
 
 
