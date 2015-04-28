@@ -12,13 +12,9 @@
 #import "Hunt.h"
 #import <CoreLocation/CoreLocation.h>
 
-//@protocol CLLocationManagerDelegate;
-
-
-@interface StepViewController : UIViewController<CLLocationManagerDelegate>{
+@interface StepViewController : UIViewController<DataSourceReadyForUseDelegate, CLLocationManagerDelegate>{
     CLLocationManager *locationManager;
-    CLGeocoder *geocoder;
-    CLPlacemark *placemark;
+
 }
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
