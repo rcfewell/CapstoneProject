@@ -27,7 +27,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,12 +50,7 @@
 //    takePhoto.allowsEditing = YES;
 //    takePhoto.sourceType = UIImagePickerControllerSourceTypeCamera;
 //    [self presentViewController:takePhoto animated:YES completion:nil];
-//    
-
-    
-    
-    
-    
+//
 }
 
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -70,6 +64,13 @@
     
     
 }
+
+
+- (IBAction)submitStepButtonPressed:(UIButton *)sender {
+    NSLog(@"Title = %@", self.huntTitle.text);
+    NSLog(@"Description = %@", self.stepDesc.text);
+}
+
 
 /*
 #pragma mark - Navigation
