@@ -26,6 +26,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,17 +43,21 @@
     [self presentViewController:pickImage animated:YES completion:nil];
 //    [pickImage  release];
     
+    ////// USING Camera /////
+    
+//    UIImagePickerController *takePhoto = [[UIImagePickerController alloc] init];
+//    
+//    takePhoto.delegate = self;
+//    takePhoto.allowsEditing = YES;
+//    takePhoto.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    [self presentViewController:takePhoto animated:YES completion:nil];
+//    
+
+    
     
     
     
 }
-
-//- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
-//{
-//    NSLog( @"pick image" );
-//    self.stepImage.image = image;
-//    [picker presentViewController: animated:YES completion:nil];
-//}
 
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -59,7 +65,12 @@
 //    [picker release];
     
     self.stepImage.image = [info objectForKey: UIImagePickerControllerOriginalImage];
+    
+    
+    
+    
 }
+
 /*
 #pragma mark - Navigation
 
