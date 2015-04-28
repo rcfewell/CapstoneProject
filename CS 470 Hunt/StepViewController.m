@@ -25,6 +25,9 @@
 
 @property (nonatomic) BOOL dataReady;
 
+@property (nonatomic) CLLocationDegrees imageLongitude;
+@property (nonatomic) CLLocationDegrees imageLatitude;
+@property (nonatomic) CLLocation * imageLocation;
 
 
 @end
@@ -77,7 +80,6 @@
     //-----------------------------------------------
     //          Set up location stuff
     self.locationManager = [[CLLocationManager alloc] init];
-    geocoder = [[CLGeocoder alloc] init];
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
@@ -85,6 +87,7 @@
         [self.locationManager requestAlwaysAuthorization];
     }
     [self.locationManager startUpdatingLocation];
+    self.imageLocation = [[CLLocation alloc]init];
     //-----------------------------------------------
 
 }
@@ -167,75 +170,25 @@
 }
 
 
-/* This is from http://stackoverflow.com/questions/6894624/how-can-i-get-gps-location-in-iphone 
- It is an attempt to get the users current location.. This will be used to see if user is in vicinity of photo
- */
-//-(void)startLocationManager
-//{
-//        NSLog(@"Called start location manager");
-//    if ([CLLocationManager locationServicesEnabled]) {
-//        self.locationManager = [[CLLocationManager alloc] init];
-//        self.locationManager.delegate = self;
-//        [self.locationManager startUpdatingLocation];
-//    } else {
-//        NSLog(@"Location services are not enabled");
-//        return;
-//    }
-//    
-//
-//    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-//        [self.locationManager requestAlwaysAuthorization];
-//    }
-//    
-//    self.locationManager.desiredAccuracy=kCLLocationAccuracyBest;
-//    [self.locationManager startMonitoringSignificantLocationChanges];
-//    self.locationManager.distanceFilter=kCLDistanceFilterNone;
-//    [self.locationManager startUpdatingLocation];
-//
-//    //
-////    CLLocation *newLocation = [[CLLocation alloc] initWithLatitude:0 longitude:0];
-////    CLLocation *oldLocation = [[CLLocation alloc] initWithLatitude:100 longitude:100];
-////    [self locationManager:self.locationManager didUpdateLocations:newLocation fromLocation:oldLocation];
-//    
-//}
-//
-//-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
-//{
-////    CLLocationCoordinate2D coordinate = [newLocation coordinate];
-////    double dblLatitude = coordinate.latitude;
-////    double dblLongitude = coordinate.longitude;
-//
-//    NSLog(@"didUpdateToLocation: %@", newLocation);
-//
-//}
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    
     CLLocation *currentLocation = newLocation;
-    NSLog(@"%@", currentLocation);
+    self.imageLatitude = [[self.step getValueForAttribute:@"lat"] floatValue];
+    self.imageLongitude = [[self.step getValueForAttribute:@"long"] floatValue];
 
-    [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
-        
-        if (error == nil && [placemarks count] > 0) {
-            placemark = [placemarks lastObject];
-            NSLog(@"Longitude %@", @(currentLocation.coordinate.longitude));
-            NSLog(@"Latitude %@", @(currentLocation.coordinate.latitude));
-            NSLog(@"Country: %@", placemark.country);
-            NSLog(@"Area: %@", placemark.administrativeArea);
-            NSLog(@"City: %@", placemark.locality);
-            NSLog(@"Code: %@", placemark.postalCode);
-            NSLog(@"Road: %@", placemark.thoroughfare);
-            NSLog(@"Number: %@", placemark.subThoroughfare);
-            
-            //            // Stop Location Manager
-            //            [self.locationManager stopUpdatingLocation];
-            
-        } else {
-            NSLog(@"%@", error.debugDescription);
-            [self.locationManager stopUpdatingLocation];
-            
-        }
-    }];
+    CLLocation *imageLocation = [[CLLocation alloc] initWithLatitude:self.imageLatitude longitude:self.imageLongitude];
+    float distance = [imageLocation getDistanceFrom:currentLocation];
+    NSLog(@"Distance = %f", distance);
+    // if distance is less than whatever it needs to be we go to next step?
+    
+    NSString *imgLong = [NSString stringWithFormat:@"Image Longitude %f", self.imageLongitude];
+    NSString *imgLat = [NSString stringWithFormat:@"Image Latitude %f", self.imageLatitude];
+    NSLog( @"%@", imgLong );
+    NSLog( @"%@", imgLat );
+    NSLog(@"Users Longitude %@", @(currentLocation.coordinate.longitude));
+    NSLog(@"Users Latitude  %@", @(currentLocation.coordinate.latitude));
+
+
 }
 @end
 
