@@ -32,7 +32,34 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)takePictureButtonPressed:(UIButton *)sender {
+    NSLog(@"Open Camera roll");
+    
+    UIImagePickerController *pickImage = [[UIImagePickerController alloc] init];
+    pickImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    pickImage.delegate = self;
+    [self presentViewController:pickImage animated:YES completion:nil];
+//    [pickImage  release];
+    
+    
+    
+    
+}
 
+//- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
+//{
+//    NSLog( @"pick image" );
+//    self.stepImage.image = image;
+//    [picker presentViewController: animated:YES completion:nil];
+//}
+
+- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+//    [picker release];
+    
+    self.stepImage.image = [info objectForKey: UIImagePickerControllerOriginalImage];
+}
 /*
 #pragma mark - Navigation
 

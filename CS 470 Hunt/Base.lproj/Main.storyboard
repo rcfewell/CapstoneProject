@@ -142,6 +142,9 @@
                                             <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="0.5"/>
                                             <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="5"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="takePictureButtonPressed:" destination="ebx-JG-cV6" eventType="touchUpInside" id="rIS-VF-QoG"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <userDefinedRuntimeAttributes>
