@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CreateDataSource.h"
+@import AssetsLibrary;
 
 @interface CreateViewController : UIViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITextViewDelegate, UIAlertViewDelegate>
 

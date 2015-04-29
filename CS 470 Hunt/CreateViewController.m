@@ -10,6 +10,7 @@
 
 @interface CreateViewController ()
 
+
 @property (weak, nonatomic) IBOutlet UITextField *huntTitle;
 @property (weak, nonatomic) IBOutlet UILabel *stepNum;
 @property (weak, nonatomic) IBOutlet UIButton *takePicture;
@@ -19,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *finishHunt;
 
 @property (nonatomic) CreateDataSource *dataSource;
+@property (nonatomic) ALAssetsLibrary *library;
 
 
 @end
@@ -35,6 +37,8 @@
     
     self.huntTitle.delegate = self;
     self.stepDesc.delegate = self;
+    self.library = [[ALAssetsLibrary alloc] init];
+    
     
     
     
@@ -101,6 +105,7 @@
     {
         NSLog( @"pressed camera" );
         UIAlertView *cameraAlert = [[UIAlertView alloc] initWithTitle:@"Simulator Error" message:@"Simulator does not allow the camera to be used" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+
         [cameraAlert show];
 //        UIImagePickerController *takePhoto = [[UIImagePickerController alloc] init];
 //    
@@ -125,6 +130,17 @@
     
     self.stepImage.image = [info objectForKey: UIImagePickerControllerOriginalImage];
     
+
+//    NSLog( @"image desc: %@", self.stepImage.isAnimating );
+    NSURL *imageURL = [info objectForKey:UIImagePickerControllerReferenceURL];
+    [self.library assetForURL:imageURL resultBlock:^(ALAsset *asset){
+        ALAssetRepresentation *r = [asset defaultRepresentation];
+        self.stepImage.image = [UIImage imageWithCGImage: r.fullResolutionImage];
+        
+    }failureBlock:nil];
+    
+    
+    
     
     
 }
@@ -133,6 +149,7 @@
 {
     NSLog( @"text field did begin editing" );
 }
+
 
 - (void) textFieldDidEndEditing:(UITextField *)textField
 {
