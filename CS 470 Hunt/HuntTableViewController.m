@@ -40,8 +40,10 @@ static NSString *tableCellViewID = @"Cell";
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:tableCellViewID];
     
-    NSString *huntURLString = @"http://cs.sonoma.edu/~ppfeffer/470/pullData.py?rType=allHunts";
-//    NSString *huntURLString = @"http://cs.sonoma.edu/~ppfeffer/470/pullData.py?rType=huntsWithImage";
+    //This just shows all hunts even if there is no picture associated with it
+//    NSString *huntURLString = @"http://cs.sonoma.edu/~ppfeffer/470/pullData.py?rType=allHunts";
+    //shows hunts, image and date for hunts that have images
+    NSString *huntURLString = @"http://cs.sonoma.edu/~ppfeffer/470/pullData.py?rType=huntsWithImage";
     
 
     

@@ -10,6 +10,9 @@
 
 
 @interface StepViewController ()
+{
+    int stepNumber;
+}
 
 
 
@@ -20,6 +23,7 @@
 
 @property (nonatomic) StepDataSource *dataSource;
 @property (nonatomic) Step *step;
+@property (nonatomic) NSInteger numberOfSteps;
 @property (nonatomic) UIActivityIndicatorView *activityIndicator;
 
 
@@ -101,6 +105,9 @@
     self.dataReady = true;
     
     self.step = [self.dataSource stepAtIndex:0];
+    self.numberOfSteps = [self.dataSource numberOfSteps];
+    NSLog(@"Number of Steps: %lu",(unsigned long)self.numberOfSteps );
+    stepNumber = 0;
 
     [self addStepNumber];
 }
@@ -181,13 +188,30 @@
     NSLog(@"Distance = %f", distance);
     // if distance is less than whatever it needs to be we go to next step?
     
+    
     NSString *imgLong = [NSString stringWithFormat:@"Image Longitude %f", self.imageLongitude];
     NSString *imgLat = [NSString stringWithFormat:@"Image Latitude %f", self.imageLatitude];
     NSLog( @"%@", imgLong );
     NSLog( @"%@", imgLat );
     NSLog(@"Users Longitude %@", @(currentLocation.coordinate.longitude));
     NSLog(@"Users Latitude  %@", @(currentLocation.coordinate.latitude));
+    
+    if( distance < 3.0 )// withing 3 meters of the image == about 10 feet
+        [self changeStep];
 
+
+}
+
+- (void) changeStep
+{
+    NSLog( @"We found the picture" );
+    stepNumber++;
+    
+    if( stepNumber < self.numberOfSteps )
+    {
+        self.step = [self.dataSource stepAtIndex:stepNumber];
+        [self addStepNumber];
+    }
 
 }
 @end

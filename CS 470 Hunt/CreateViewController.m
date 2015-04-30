@@ -80,6 +80,7 @@
     
     int i=0;
     NSString *tempURL = @"www";
+//    NSString *tempURL = @"http://cbsnews2.cbsistatic.com/hub/i/r/2013/02/25/5788bb54-a645-11e2-a3f0-029118418759/thumbnail/620x350/cff879d1606b94fcffbf565dbc556ddf/The-International-Herald-Tribune.jpg";
     //Loop through array of steps Descriptions
     for (NSString *curStep in self.listOfStepDescriptions) {
         i++;
