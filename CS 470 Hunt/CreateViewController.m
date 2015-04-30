@@ -22,6 +22,9 @@
 @property (nonatomic) CreateDataSource *dataSource;
 @property (nonatomic) ALAssetsLibrary *library;
 
+@property (nonatomic) NSMutableArray * listOfStepDescriptions;
+@property (nonatomic) NSMutableArray * listOfStepImages;
+
 
 @end
 
@@ -39,10 +42,8 @@
     self.stepDesc.delegate = self;
     self.library = [[ALAssetsLibrary alloc] init];
     
-    
-    
-    
-    
+    self.listOfStepDescriptions = [[NSMutableArray alloc]init];
+    self.listOfStepImages = [[NSMutableArray alloc]init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,6 +54,13 @@
 - (IBAction)submitStepForHunt:(UIButton *)sender
 {
     NSLog( @"Submit step" );
+    [self.listOfStepDescriptions addObject:self.stepDesc.text];
+    
+    NSLog([self.listOfStepDescriptions description]);
+
+    [self.listOfStepImages addObject:self.stepImage.image];
+    
+    stepDesc.text = @"";
 }
 
 
@@ -67,22 +75,21 @@
     
     NSLog( @"Todays Date: %@ Hunt Title: %@", todayDate, self.huntTitle.text);
     
-//    NSString * baseString = @"http://cs.sonoma.edu/~ppfeffer/470/pullData.py?rType=huntsWithImage";
-    
-    
-    
-    
-    
-    
     NSString *huntURLString = [NSString stringWithFormat:@"http://cs.sonoma.edu/~ppfeffer/470/pullData.py?rType='setHuntName=%@---setHuntDate=%@", self.huntTitle.text, todayDate];
     huntURLString = [huntURLString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
+    int i=0;
+    NSString *tempURL = @"www";
+    //Loop through array of steps Descriptions
+    for (NSString *curStep in self.listOfStepDescriptions) {
+        i++;
+        NSString *stepURLString = [NSString stringWithFormat:@"http://cs.sonoma.edu/~ppfeffer/470/pullData.py?rType=huntName=%@---stepDesc=%@---urlPath=%@---stepNum=%d", self.huntTitle.text, curStep, tempURL,i];
+        stepURLString = [stepURLString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        self.dataSource = [[CreateDataSource alloc] initWithHuntString:stepURLString];  // Have faith daniel son
+
+    }
     
     self.dataSource = [[CreateDataSource alloc] initWithHuntString:huntURLString];
-    
-    
-    
-    
     
 }
 
