@@ -58,8 +58,12 @@
     
     NSLog([self.listOfStepDescriptions description]);
 
-    [self.listOfStepImages addObject:self.stepImage.image];
-    
+    NSData * imageData = UIImagePNGRepresentation(self.stepImage.image);
+    UIImage * tempImage = [[UIImage alloc]initWithData:imageData];
+
+    tempImage = self.stepImage.image;
+    [self.listOfStepImages addObject:tempImage];
+//    self.stepImage.image = nil;
     stepDesc.text = @"";
 }
 
@@ -79,14 +83,52 @@
     huntURLString = [huntURLString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     int i=0;
-    NSString *tempURL = @"www";
-//    NSString *tempURL = @"http://cbsnews2.cbsistatic.com/hub/i/r/2013/02/25/5788bb54-a645-11e2-a3f0-029118418759/thumbnail/620x350/cff879d1606b94fcffbf565dbc556ddf/The-International-Herald-Tribune.jpg";
     //Loop through array of steps Descriptions
     for (NSString *curStep in self.listOfStepDescriptions) {
         i++;
-        NSString *stepURLString = [NSString stringWithFormat:@"http://cs.sonoma.edu/~ppfeffer/470/pullData.py?rType=huntName=%@---stepDesc=%@---urlPath=%@---stepNum=%d", self.huntTitle.text, curStep, tempURL,i];
+        //===
+        NSDate *currentTime = [NSDate date];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"hh-mm-ss"];
+        NSString *resultString = [dateFormatter stringFromDate: currentTime];
+        resultString = [NSString stringWithFormat:@"%d-%@", i, resultString];
+        NSLog(@"Image coming up");
+        NSLog(@"%@", [self.listOfStepImages[i-1] description]);
+        NSLog(@"%@", [self.stepImage.image description]);
+        //======================================================================================================================================================================================
+        //======================================================================================================================================================================================
+        NSData *imageData = UIImagePNGRepresentation(self.listOfStepImages[i-1]);
+        NSString *urlString = @"http://cs.sonoma.edu/~ppfeffer/470/uploader.php";
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        
+        [request setURL:[NSURL URLWithString:urlString]];
+        [request setHTTPMethod:@"POST"];
+
+        NSString *boundary = @"---------------------------14737809831466499882746641449";
+        NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+        
+        [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+        
+        NSMutableData *body = [NSMutableData data];
+        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"uploadedfile\"; filename=\"%@\"\r\n", resultString] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[NSData dataWithData:imageData]];
+        [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [request setHTTPBody:body];
+        
+        NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+        NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+        NSString *tempString = [NSString stringWithFormat:@"Image Return String: %@", [returnString description]];  // Get rid of warnings
+        NSLog(@"%@", tempString);
+        //======================================================================================================================================================================================
+        //======================================================================================================================================================================================
+        NSString * urlPath = [NSString stringWithFormat:@"http://cs.sonoma.edu/~ppfeffer/470/uploads/%@",resultString];
+        NSString *stepURLString = [NSString stringWithFormat:@"http://cs.sonoma.edu/~ppfeffer/470/pullData.py?rType=huntName=%@---stepDesc=%@---urlPath=%@---stepNum=%d", self.huntTitle.text, curStep, urlPath,i];
         stepURLString = [stepURLString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         self.dataSource = [[CreateDataSource alloc] initWithHuntString:stepURLString];  // Have faith daniel son
+
+        
 
     }
     
