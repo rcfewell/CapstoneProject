@@ -57,12 +57,19 @@
     [self.listOfStepDescriptions addObject:self.stepDesc.text];
     
     NSLog([self.listOfStepDescriptions description]);
+    
+    CGRect newRect = CGRectMake(0, 0, 512, 512);
+    UIGraphicsBeginImageContext(newRect.size);
 
-    NSData * imageData = UIImagePNGRepresentation(self.stepImage.image);
-    UIImage * tempImage = [[UIImage alloc]initWithData:imageData];
-
+    UIImage * tempImage = [[UIImage alloc] init];
     tempImage = self.stepImage.image;
-    [self.listOfStepImages addObject:tempImage];
+    
+    [tempImage drawInRect:CGRectMake(0, 0, newRect.size.width, newRect.size.height)];
+
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    [self.listOfStepImages addObject:newImage];
 //    self.stepImage.image = nil;
     stepDesc.text = @"";
 }
@@ -135,7 +142,6 @@
     self.dataSource = [[CreateDataSource alloc] initWithHuntString:huntURLString];
     
 }
-
 
 - (IBAction)takePictureButtonPressed:(UIButton *)sender
 {
