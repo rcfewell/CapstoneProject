@@ -141,10 +141,40 @@
 {
     NSLog(@"Open Camera roll");
     
-    UIAlertView *chose = [[UIAlertView alloc] initWithTitle:@"Upload Photo" message:@"How would you like to add a photo?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Camera", @"Photo Library", nil];
-    [chose show];
+//    UIAlertView *chose = [[UIAlertView alloc] initWithTitle:@"Upload Photo" message:@"How would you like to add a photo?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Camera", @"Photo Library", nil];
+    UIActionSheet *prac = [[UIActionSheet alloc] initWithTitle:@"Upload Photo" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Photo Library", nil];
+    [prac showInView:self.view];
+//    [chose show];
     
     
+}
+
+- (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if( buttonIndex == 0 )
+    {
+        NSLog( @"pressed camera" );
+        UIAlertView *cameraAlert = [[UIAlertView alloc] initWithTitle:@"Simulator Error" message:@"Simulator does not allow the camera to be used" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+        
+        [cameraAlert show];
+        //        UIImagePickerController *takePhoto = [[UIImagePickerController alloc] init];
+        //
+        //        takePhoto.delegate = self;
+        //        takePhoto.allowsEditing = YES;
+        //        takePhoto.sourceType = UIImagePickerControllerSourceTypeCamera;
+        //        [self presentViewController:takePhoto animated:YES completion:nil];
+    }
+    if( buttonIndex == 1 )
+    {
+        NSLog( @"pressed photo library" );
+        UIImagePickerController *pickImage = [[UIImagePickerController alloc] init];
+        pickImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        pickImage.delegate = self;
+        [self presentViewController:pickImage animated:YES completion:nil];
+    }
+    if( buttonIndex == 2 )
+        NSLog( @"pressed cancel" );
+        
 }
 
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

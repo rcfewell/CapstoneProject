@@ -161,7 +161,11 @@
                 UIImage *urlImage = [UIImage imageWithData:imageData];
                 
                 if( urlImage )
+                {
                     self.stepImage.image = urlImage;
+//
+                }
+                
             }
 //                else
 //                    self.stepImage.image = [UIImage imageNamed:@"loading_image.jpg"];
@@ -171,6 +175,7 @@
             
         });
     });
+    
 
     
     
@@ -211,6 +216,14 @@
     {
         self.step = [self.dataSource stepAtIndex:stepNumber];
         [self addStepNumber];
+//        [UIView animateWithDuration:1.0 animations:^{
+//            self.stepImage.alpha = 0.0;
+//            
+//        }completion:^(BOOL finished) {
+//            self.step = [self.dataSource stepAtIndex:stepNumber];
+//            [self addStepNumber];
+////            self.stepImage.alpha = 1.0;
+//        }];
     }
 
 }

@@ -10,6 +10,6 @@
 #import "CreateDataSource.h"
 @import AssetsLibrary;
 
-@interface CreateViewController : UIViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITextViewDelegate, UIAlertViewDelegate>
+@interface CreateViewController : UIViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITextViewDelegate, UIAlertViewDelegate, UIActionSheetDelegate>
 
 @end
