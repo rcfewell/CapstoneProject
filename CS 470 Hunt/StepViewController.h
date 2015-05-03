@@ -12,7 +12,7 @@
 #import "Hunt.h"
 #import <CoreLocation/CoreLocation.h>
 
-@interface StepViewController : UIViewController<DataSourceReadyForUseDelegate, CLLocationManagerDelegate>{
+@interface StepViewController : UIViewController<DataSourceReadyForUseDelegate, CLLocationManagerDelegate, UIAlertViewDelegate>{
     CLLocationManager *locationManager;
 
 }

@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+
 #import "CreateDataSource.h"
 @import AssetsLibrary;
 
-@interface CreateViewController : UIViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITextViewDelegate, UIAlertViewDelegate, UIActionSheetDelegate>
+@interface CreateViewController : UIViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITextViewDelegate, UIAlertViewDelegate, UIActionSheetDelegate, CLLocationManagerDelegate>{
+    CLLocationManager *locationManager;
+
+}
+@property (strong, nonatomic) CLLocationManager *locationManager;
 
 @end

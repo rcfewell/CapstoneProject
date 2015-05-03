@@ -8,6 +8,14 @@
 
 #import "CreateViewController.h"
 
+struct location
+{
+    double longitude;
+    double latitude;
+};
+
+
+
 @interface CreateViewController ()
 
 
@@ -19,13 +27,19 @@
 @property (weak, nonatomic) IBOutlet UIButton *submitStep;
 @property (weak, nonatomic) IBOutlet UIButton *finishHunt;
 
+
 @property (nonatomic) CreateDataSource *dataSource;
 @property (nonatomic) ALAssetsLibrary *library;
 
 @property (nonatomic) NSMutableArray * listOfStepDescriptions;
 @property (nonatomic) NSMutableArray * listOfStepImages;
+@property (nonatomic) NSMutableArray * listOfStepLocations;
+@property (nonatomic) NSMutableArray * listOfStepLong;
+@property (nonatomic) NSMutableArray * listOfStepLat;
 
 
+@property (nonatomic) double userLong;
+@property (nonatomic) double userLat;
 @end
 
 
@@ -33,6 +47,7 @@
 
 @synthesize huntTitle;
 @synthesize stepDesc;
+@synthesize locationManager;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -44,6 +59,23 @@
     
     self.listOfStepDescriptions = [[NSMutableArray alloc]init];
     self.listOfStepImages = [[NSMutableArray alloc]init];
+
+    self.listOfStepLat = [[NSMutableArray alloc] init];
+    self.listOfStepLong = [[NSMutableArray alloc] init];
+
+    //-----------------------------------------------
+    //          Set up location stuff
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+    {
+        [self.locationManager requestAlwaysAuthorization];
+    }
+    [self.locationManager startUpdatingLocation];
+    
+    
+    //-----------------------------------------------
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,23 +87,32 @@
 {
     NSLog( @"Submit step" );
     [self.listOfStepDescriptions addObject:self.stepDesc.text];
+
+    //==============================================
+    // Add the long and lat of step to an array
+    NSNumber *tempLat = [[NSNumber alloc] initWithDouble:self.userLat];
+    NSNumber *tempLong = [[NSNumber alloc] initWithDouble:self.userLong];
+    [self.listOfStepLat addObject:tempLat];
+    [self.listOfStepLong addObject:tempLong];
+    //==============================================
     
     NSLog([self.listOfStepDescriptions description]);
     
     CGRect newRect = CGRectMake(0, 0, 512, 512);
     UIGraphicsBeginImageContext(newRect.size);
-
     UIImage * tempImage = [[UIImage alloc] init];
     tempImage = self.stepImage.image;
-    
     [tempImage drawInRect:CGRectMake(0, 0, newRect.size.width, newRect.size.height)];
-
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-
     [self.listOfStepImages addObject:newImage];
-//    self.stepImage.image = nil;
+    
+    self.stepImage.image = nil;
     stepDesc.text = @"";
+    
+    self.stepNum.text = [NSString stringWithFormat:@"Step %lu", (unsigned long)[self.listOfStepDescriptions count]+1];
+    
+    self.finishHunt.enabled = true;
 }
 
 
@@ -96,7 +137,7 @@
         //===
         NSDate *currentTime = [NSDate date];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"hh-mm-ss"];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd_hh:mm:ss"];
         NSString *resultString = [dateFormatter stringFromDate: currentTime];
         resultString = [NSString stringWithFormat:@"%d-%@", i, resultString];
         NSLog(@"Image coming up");
@@ -118,7 +159,7 @@
         
         NSMutableData *body = [NSMutableData data];
         [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"uploadedfile\"; filename=\"%@\"\r\n", resultString] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"uploadedfile\"; filename=\"%@.jpg\"\r\n", resultString] dataUsingEncoding:NSUTF8StringEncoding]];
         [body appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
         [body appendData:[NSData dataWithData:imageData]];
         [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -130,8 +171,8 @@
         NSLog(@"%@", tempString);
         //======================================================================================================================================================================================
         //======================================================================================================================================================================================
-        NSString * urlPath = [NSString stringWithFormat:@"http://cs.sonoma.edu/~ppfeffer/470/uploads/%@",resultString];
-        NSString *stepURLString = [NSString stringWithFormat:@"http://cs.sonoma.edu/~ppfeffer/470/pullData.py?rType=huntName=%@---stepDesc=%@---urlPath=%@---stepNum=%d", self.huntTitle.text, curStep, urlPath,i];
+        NSString * urlPath = [NSString stringWithFormat:@"http://cs.sonoma.edu/~ppfeffer/470/uploads/%@.jpg",resultString];
+        NSString *stepURLString = [NSString stringWithFormat:@"http://cs.sonoma.edu/~ppfeffer/470/pullData.py?rType=huntName=%@---stepDesc=%@---urlPath=%@---stepNum=%d---userLong=%@---userLat=%@", self.huntTitle.text, curStep, urlPath,i, self.listOfStepLong[i-1], self.listOfStepLat[i-1]];
         stepURLString = [stepURLString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         self.dataSource = [[CreateDataSource alloc] initWithHuntString:stepURLString];  // Have faith daniel son
 
@@ -140,6 +181,8 @@
     }
     
     self.dataSource = [[CreateDataSource alloc] initWithHuntString:huntURLString];
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
     
 }
 
@@ -220,6 +263,7 @@
 //    NSLog( @"image desc: %@", self.stepImage.isAnimating );
     NSURL *imageURL = [info objectForKey:UIImagePickerControllerReferenceURL];
     [self.library assetForURL:imageURL resultBlock:^(ALAsset *asset){
+
         ALAssetRepresentation *r = [asset defaultRepresentation];
         self.stepImage.image = [UIImage imageWithCGImage: r.fullResolutionImage];
         
@@ -230,6 +274,19 @@
     
     
 }
+
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    CLLocation *currentLocation = newLocation;
+
+    NSLog(@"Users Longitude %@", @(currentLocation.coordinate.longitude));
+    NSLog(@"Users Latitude  %@", @(currentLocation.coordinate.latitude));
+
+    self.userLong = currentLocation.coordinate.longitude;
+    self.userLat = currentLocation.coordinate.latitude;
+}
+
 
 - (void) textFieldDidBeginEditing:(UITextField *)textField
 {

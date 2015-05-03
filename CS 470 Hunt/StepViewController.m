@@ -20,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *stepCount;
 @property (weak, nonatomic) IBOutlet UIImageView *stepImage;
 @property (weak, nonatomic) IBOutlet UILabel *optionalText;
+@property (weak, nonatomic) IBOutlet UIView *helpIndicator;
+@property (weak, nonatomic) IBOutlet UISwitch *needHelp;
 
 @property (nonatomic) StepDataSource *dataSource;
 @property (nonatomic) Step *step;
@@ -32,7 +34,7 @@
 @property (nonatomic) CLLocationDegrees imageLongitude;
 @property (nonatomic) CLLocationDegrees imageLatitude;
 @property (nonatomic) CLLocation * imageLocation;
-
+@property (nonatomic) float previousDistance;
 
 @end
         
@@ -55,6 +57,7 @@
 
 - (void) viewDidLoad
 {
+    self.helpIndicator.layer.borderColor = [UIColor clearColor].CGColor;
     NSLog( @"In view did load" );
     NSLog( @"Title: %@", self.huntName );
     self.huntTitle.text = self.huntName;
@@ -93,7 +96,6 @@
     [self.locationManager startUpdatingLocation];
     self.imageLocation = [[CLLocation alloc]init];
     //-----------------------------------------------
-
 }
 
 - (void) dataSourceReadyForUse:(StepDataSource *) dataSource
@@ -135,6 +137,18 @@
     [self addImage];
     
     
+}
+
+- (IBAction)doesNeedHelp:(UISwitch *)sender
+{
+
+    if( [self.needHelp isOn])
+    {
+        NSLog( @"Switch is on" );
+    }
+    else{
+        self.helpIndicator.layer.borderColor = [UIColor clearColor].CGColor;
+    }
 }
 
 
@@ -196,14 +210,31 @@
     
     NSString *imgLong = [NSString stringWithFormat:@"Image Longitude %f", self.imageLongitude];
     NSString *imgLat = [NSString stringWithFormat:@"Image Latitude %f", self.imageLatitude];
-    NSLog( @"%@", imgLong );
-    NSLog( @"%@", imgLat );
-    NSLog(@"Users Longitude %@", @(currentLocation.coordinate.longitude));
-    NSLog(@"Users Latitude  %@", @(currentLocation.coordinate.latitude));
+//    NSLog( @"%@", imgLong );
+//    NSLog( @"%@", imgLat );
+//    NSLog(@"Users Longitude %@", @(currentLocation.coordinate.longitude));
+//    NSLog(@"Users Latitude  %@", @(currentLocation.coordinate.latitude));
     
-    if( distance < 3.0 )// withing 3 meters of the image == about 10 feet
+    // withing 3 meters of the image == about 10 feet
+    if( distance < 3.0 ){
         [self changeStep];
-
+    }
+    if( [self.needHelp isOn])
+    {
+        if (self.previousDistance < distance){
+            self.helpIndicator.layer.borderColor = [UIColor redColor].CGColor;
+        }
+        else if (self.previousDistance == distance){
+            
+        }
+        else{
+            self.helpIndicator.layer.borderColor = [UIColor greenColor].CGColor;
+        }
+    }
+    else{
+        NSLog(@"%lu", self.needHelp.state);
+    }
+    self.previousDistance = distance;
 
 }
 
@@ -211,6 +242,16 @@
 {
     NSLog( @"We found the picture" );
     stepNumber++;
+//    self.needHelp.on = NO;
+    [self.needHelp setOn:NO animated:YES];
+    self.helpIndicator.layer.borderColor = [UIColor clearColor].CGColor;
+    
+    if( stepNumber == self.numberOfSteps )
+    {
+        UIAlertView *finishedHunt = [[UIAlertView alloc] initWithTitle:@"Congratulations" message:@"You finished the hunt!" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+        [finishedHunt show];
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
     
     if( stepNumber < self.numberOfSteps )
     {
@@ -226,6 +267,12 @@
 //        }];
     }
 
+}
+
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if( buttonIndex == 0 )
+        [self.navigationController popToRootViewControllerAnimated:YES];
 }
 @end
 
