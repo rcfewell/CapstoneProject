@@ -99,19 +99,20 @@ struct location
     NSLog([self.listOfStepDescriptions description]);
     
     CGRect newRect = CGRectMake(0, 0, 512, 512);
+    
     UIGraphicsBeginImageContext(newRect.size);
     UIImage * tempImage = [[UIImage alloc] init];
     tempImage = self.stepImage.image;
     [tempImage drawInRect:CGRectMake(0, 0, newRect.size.width, newRect.size.height)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    
     [self.listOfStepImages addObject:newImage];
     
     self.stepImage.image = nil;
     stepDesc.text = @"";
     
     self.stepNum.text = [NSString stringWithFormat:@"Step %lu", (unsigned long)[self.listOfStepDescriptions count]+1];
-    
     self.finishHunt.enabled = true;
 }
 
@@ -191,7 +192,7 @@ struct location
     NSLog(@"Open Camera roll");
     
 //    UIAlertView *chose = [[UIAlertView alloc] initWithTitle:@"Upload Photo" message:@"How would you like to add a photo?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Camera", @"Photo Library", nil];
-    UIActionSheet *prac = [[UIActionSheet alloc] initWithTitle:@"Upload Photo" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Photo Library", nil];
+    UIActionSheet *prac = [[UIActionSheet alloc] initWithTitle:@"Upload Photo" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", nil];
     [prac showInView:self.view];
 //    [chose show];
     
@@ -203,71 +204,74 @@ struct location
     if( buttonIndex == 0 )
     {
         NSLog( @"pressed camera" );
-        UIAlertView *cameraAlert = [[UIAlertView alloc] initWithTitle:@"Simulator Error" message:@"Simulator does not allow the camera to be used" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+//        UIAlertView *cameraAlert = [[UIAlertView alloc] initWithTitle:@"Simulator Error" message:@"Simulator does not allow the camera to be used" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+//        
+//        [cameraAlert show];
+        UIImagePickerController *takePhoto = [[UIImagePickerController alloc] init];
         
-        [cameraAlert show];
-        //        UIImagePickerController *takePhoto = [[UIImagePickerController alloc] init];
-        //
-        //        takePhoto.delegate = self;
-        //        takePhoto.allowsEditing = YES;
-        //        takePhoto.sourceType = UIImagePickerControllerSourceTypeCamera;
-        //        [self presentViewController:takePhoto animated:YES completion:nil];
+        takePhoto.delegate = self;
+        takePhoto.allowsEditing = YES;
+        takePhoto.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self presentViewController:takePhoto animated:YES completion:nil];
     }
-    if( buttonIndex == 1 )
-    {
-        NSLog( @"pressed photo library" );
-        UIImagePickerController *pickImage = [[UIImagePickerController alloc] init];
-        pickImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        pickImage.delegate = self;
-        [self presentViewController:pickImage animated:YES completion:nil];
-    }
+//    if( buttonIndex == 1 )
+//    {
+//        NSLog( @"pressed photo library" );
+//        UIImagePickerController *pickImage = [[UIImagePickerController alloc] init];
+//        pickImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//        pickImage.delegate = self;
+//        [self presentViewController:pickImage animated:YES completion:nil];
+//    }
     if( buttonIndex == 2 )
         NSLog( @"pressed cancel" );
         
 }
 
-- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if( buttonIndex == 0)
-        NSLog( @"pressed cancel" );
-    else if( buttonIndex == 1 )
-    {
-        NSLog( @"pressed camera" );
-        UIAlertView *cameraAlert = [[UIAlertView alloc] initWithTitle:@"Simulator Error" message:@"Simulator does not allow the camera to be used" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles: nil];
-
-        [cameraAlert show];
-//        UIImagePickerController *takePhoto = [[UIImagePickerController alloc] init];
-//    
-//        takePhoto.delegate = self;
-//        takePhoto.allowsEditing = YES;
-//        takePhoto.sourceType = UIImagePickerControllerSourceTypeCamera;
-//        [self presentViewController:takePhoto animated:YES completion:nil];
-    }
-    else if ( buttonIndex == 2 )
-    {
-        NSLog( @"pressed photo Library" );
-        UIImagePickerController *pickImage = [[UIImagePickerController alloc] init];
-        pickImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        pickImage.delegate = self;
-        [self presentViewController:pickImage animated:YES completion:nil];
-    }
-}
+//- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+//{
+//    if( buttonIndex == 0)
+//        NSLog( @"pressed cancel" );
+//    else if( buttonIndex == 1 )
+//    {
+//        NSLog( @"pressed camera" );
+//        UIAlertView *cameraAlert = [[UIAlertView alloc] initWithTitle:@"Simulator Error" message:@"Simulator does not allow the camera to be used" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+//
+//        [cameraAlert show];
+////        UIImagePickerController *takePhoto = [[UIImagePickerController alloc] init];
+////    
+////        takePhoto.delegate = self;
+////        takePhoto.allowsEditing = YES;
+////        takePhoto.sourceType = UIImagePickerControllerSourceTypeCamera;
+////        [self presentViewController:takePhoto animated:YES completion:nil];
+//    }
+//    else if ( buttonIndex == 2 )
+//    {
+//        NSLog( @"pressed photo Library" );
+//        UIImagePickerController *pickImage = [[UIImagePickerController alloc] init];
+//        pickImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//        pickImage.delegate = self;
+//        [self presentViewController:pickImage animated:YES completion:nil];
+//    }
+//}
 
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    [picker dismissViewControllerAnimated:YES completion:nil];
+
     
     self.stepImage.image = [info objectForKey: UIImagePickerControllerOriginalImage];
     
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    
 
 //    NSLog( @"image desc: %@", self.stepImage.isAnimating );
-    NSURL *imageURL = [info objectForKey:UIImagePickerControllerReferenceURL];
-    [self.library assetForURL:imageURL resultBlock:^(ALAsset *asset){
-
-        ALAssetRepresentation *r = [asset defaultRepresentation];
-        self.stepImage.image = [UIImage imageWithCGImage: r.fullResolutionImage];
-        
-    }failureBlock:nil];
+//    NSURL *imageURL = [info objectForKey:UIImagePickerControllerReferenceURL];
+//    [self.library assetForURL:imageURL resultBlock:^(ALAsset *asset){
+//
+//        ALAssetRepresentation *r = [asset defaultRepresentation];
+//        self.stepImage.image = [UIImage imageWithCGImage: r.fullResolutionImage];
+//        
+//    }failureBlock:nil];
     
     
     
@@ -309,6 +313,11 @@ struct location
 {
     NSLog( @"done editing text view" );
     NSLog( @"step description: %@", self.stepDesc.text );
+}
+
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
 
 
