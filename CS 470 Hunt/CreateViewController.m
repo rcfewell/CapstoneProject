@@ -175,6 +175,7 @@ struct location
         NSString * urlPath = [NSString stringWithFormat:@"http://cs.sonoma.edu/~ppfeffer/470/uploads/%@.jpg",resultString];
         NSString *stepURLString = [NSString stringWithFormat:@"http://cs.sonoma.edu/~ppfeffer/470/pullData.py?rType=huntName=%@---stepDesc=%@---urlPath=%@---stepNum=%d---userLong=%@---userLat=%@", self.huntTitle.text, curStep, urlPath,i, self.listOfStepLong[i-1], self.listOfStepLat[i-1]];
         stepURLString = [stepURLString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSLog(@"%@", stepURLString);
         self.dataSource = [[CreateDataSource alloc] initWithHuntString:stepURLString];  // Have faith daniel son
 
         

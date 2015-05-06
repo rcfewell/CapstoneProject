@@ -35,7 +35,6 @@
 @property (nonatomic) CLLocationDegrees imageLatitude;
 @property (nonatomic) CLLocation * imageLocation;
 @property (nonatomic) float previousDistance;
-
 @end
         
 @implementation StepViewController
@@ -43,6 +42,7 @@
 @synthesize stepImage;
 @synthesize locationManager;
 
+int count = 0;
 
 
 - (instancetype) initWithHunt:(Hunt *) hunt
@@ -88,7 +88,7 @@
     //          Set up location stuff
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
     {
         [self.locationManager requestAlwaysAuthorization];
@@ -199,24 +199,31 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     CLLocation *currentLocation = newLocation;
-    self.imageLatitude = [[self.step getValueForAttribute:@"lat"] floatValue];
-    self.imageLongitude = [[self.step getValueForAttribute:@"long"] floatValue];
+    self.imageLatitude = [[self.step getValueForAttribute:@"lat"] doubleValue];
+    self.imageLongitude = [[self.step getValueForAttribute:@"long"] doubleValue];
 
     CLLocation *imageLocation = [[CLLocation alloc] initWithLatitude:self.imageLatitude longitude:self.imageLongitude];
     float distance = [imageLocation getDistanceFrom:currentLocation];
-    NSLog(@"Distance = %f", distance);
+    NSLog(@"Distance = %.12f", distance);
     // if distance is less than whatever it needs to be we go to next step?
     
     
-    NSString *imgLong = [NSString stringWithFormat:@"Image Longitude %f", self.imageLongitude];
-    NSString *imgLat = [NSString stringWithFormat:@"Image Latitude %f", self.imageLatitude];
-//    NSLog( @"%@", imgLong );
-//    NSLog( @"%@", imgLat );
-//    NSLog(@"Users Longitude %@", @(currentLocation.coordinate.longitude));
-//    NSLog(@"Users Latitude  %@", @(currentLocation.coordinate.latitude));
+    NSString *imgLong = [NSString stringWithFormat:@"Image Longitude %.12f", self.imageLongitude];
+    NSString *imgLat = [NSString stringWithFormat:@"Image Latitude %.12f", self.imageLatitude];
+    NSLog( @"%@", imgLong );
+    NSLog( @"%@", imgLat );
+    NSLog(@"Users Longitude %@", @(currentLocation.coordinate.longitude));
+    NSLog(@"Users Latitude  %@", @(currentLocation.coordinate.latitude));
     
-    // withing 3 meters of the image == about 10 feet
-    if( distance < 3.0 ){
+    // withing 5 meters of the image == about 10 feet
+    if( distance < 16.0 ){
+//        [self changeStep];
+        count += 1;
+    }
+    else{
+        count = 0;
+    }
+    if (count >= 3){
         [self changeStep];
     }
     if( [self.needHelp isOn])
@@ -268,7 +275,19 @@
     }
 
 }
+-(void) viewDidAppear:(BOOL)animated{
+    if (self.isMovingFromParentViewController){
+        NSLog(@"Moving to parent");
+        [locationManager stopUpdatingLocation];
+    }
+}
 
+-(void) viewWillDisappear:(BOOL)animated{
+    if (self.isMovingFromParentViewController){
+        NSLog(@"Moving to parent");
+        [locationManager stopUpdatingLocation];
+    }
+}
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if( buttonIndex == 0 )
