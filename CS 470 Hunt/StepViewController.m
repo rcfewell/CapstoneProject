@@ -70,7 +70,7 @@ int count = 0;
     
     NSLog( @"hunt Name: %@", hName );
     
-    NSString *stepURLString = @"http://cs.sonoma.edu/~ppfeffer/470/pullData.py?rType=stepsInHunt&rHunt=";
+    NSString *stepURLString = @"http://www.cs.sonoma.edu/~ppfeffer/470/pullData.py?rType=stepsInHunt&rHunt=";
     stepURLString = [stepURLString stringByAppendingString:hName];
     stepURLString = [stepURLString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     

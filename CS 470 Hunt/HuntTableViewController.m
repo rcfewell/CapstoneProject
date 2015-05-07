@@ -43,7 +43,7 @@ static NSString *tableCellViewID = @"Cell";
     //This just shows all hunts even if there is no picture associated with it
 //    NSString *huntURLString = @"http://cs.sonoma.edu/~ppfeffer/470/pullData.py?rType=allHunts";
     //shows hunts, image and date for hunts that have images
-    NSString *huntURLString = @"http://cs.sonoma.edu/~ppfeffer/470/pullData.py?rType=huntsWithImage";
+    NSString *huntURLString = @"http://www.cs.sonoma.edu/~ppfeffer/470/pullData.py?rType=huntsWithImage";
     
 
     

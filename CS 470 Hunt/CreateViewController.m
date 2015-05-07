@@ -74,7 +74,6 @@ struct location
     }
     [self.locationManager startUpdatingLocation];
     
-    
     //-----------------------------------------------
 }
 
@@ -128,7 +127,7 @@ struct location
     
     NSLog( @"Todays Date: %@ Hunt Title: %@", todayDate, self.huntTitle.text);
     
-    NSString *huntURLString = [NSString stringWithFormat:@"http://cs.sonoma.edu/~ppfeffer/470/pullData.py?rType='setHuntName=%@---setHuntDate=%@", self.huntTitle.text, todayDate];
+    NSString *huntURLString = [NSString stringWithFormat:@"http://www.cs.sonoma.edu/~ppfeffer/470/pullData.py?rType='setHuntName=%@---setHuntDate=%@", self.huntTitle.text, todayDate];
     huntURLString = [huntURLString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     int i=0;
@@ -147,7 +146,7 @@ struct location
         //======================================================================================================================================================================================
         //======================================================================================================================================================================================
         NSData *imageData = UIImagePNGRepresentation(self.listOfStepImages[i-1]);
-        NSString *urlString = @"http://cs.sonoma.edu/~ppfeffer/470/uploader.php";
+        NSString *urlString = @"http://www.cs.sonoma.edu/~ppfeffer/470/uploader.php";
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
         
         [request setURL:[NSURL URLWithString:urlString]];
@@ -172,8 +171,8 @@ struct location
         NSLog(@"%@", tempString);
         //======================================================================================================================================================================================
         //======================================================================================================================================================================================
-        NSString * urlPath = [NSString stringWithFormat:@"http://cs.sonoma.edu/~ppfeffer/470/uploads/%@.jpg",resultString];
-        NSString *stepURLString = [NSString stringWithFormat:@"http://cs.sonoma.edu/~ppfeffer/470/pullData.py?rType=huntName=%@---stepDesc=%@---urlPath=%@---stepNum=%d---userLong=%@---userLat=%@", self.huntTitle.text, curStep, urlPath,i, self.listOfStepLong[i-1], self.listOfStepLat[i-1]];
+        NSString * urlPath = [NSString stringWithFormat:@"http://www.cs.sonoma.edu/~ppfeffer/470/uploads/%@.jpg",resultString];
+        NSString *stepURLString = [NSString stringWithFormat:@"http://www.cs.sonoma.edu/~ppfeffer/470/pullData.py?rType=huntName=%@---stepDesc=%@---urlPath=%@---stepNum=%d---userLong=%@---userLat=%@", self.huntTitle.text, curStep, urlPath,i, self.listOfStepLong[i-1], self.listOfStepLat[i-1]];
         stepURLString = [stepURLString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSLog(@"%@", stepURLString);
         self.dataSource = [[CreateDataSource alloc] initWithHuntString:stepURLString];  // Have faith daniel son
