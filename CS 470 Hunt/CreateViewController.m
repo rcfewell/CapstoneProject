@@ -95,7 +95,7 @@ struct location
     [self.listOfStepLong addObject:tempLong];
     //==============================================
     
-    NSLog([self.listOfStepDescriptions description]);
+    NSLog([self.listOfStepDescriptions description]); 
     
     CGRect newRect = CGRectMake(0, 0, 512, 512);
     
@@ -192,7 +192,7 @@ struct location
     NSLog(@"Open Camera roll");
     
 //    UIAlertView *chose = [[UIAlertView alloc] initWithTitle:@"Upload Photo" message:@"How would you like to add a photo?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Camera", @"Photo Library", nil];
-    UIActionSheet *prac = [[UIActionSheet alloc] initWithTitle:@"Upload Photo" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", nil];
+    UIActionSheet *prac = [[UIActionSheet alloc] initWithTitle:@"Upload Photo" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Photo Library", nil];
     [prac showInView:self.view];
 //    [chose show];
     
@@ -204,24 +204,24 @@ struct location
     if( buttonIndex == 0 )
     {
         NSLog( @"pressed camera" );
-//        UIAlertView *cameraAlert = [[UIAlertView alloc] initWithTitle:@"Simulator Error" message:@"Simulator does not allow the camera to be used" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles: nil];
-//        
-//        [cameraAlert show];
-        UIImagePickerController *takePhoto = [[UIImagePickerController alloc] init];
+        UIAlertView *cameraAlert = [[UIAlertView alloc] initWithTitle:@"Simulator Error" message:@"Simulator does not allow the camera to be used" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles: nil];
         
-        takePhoto.delegate = self;
-        takePhoto.allowsEditing = YES;
-        takePhoto.sourceType = UIImagePickerControllerSourceTypeCamera;
-        [self presentViewController:takePhoto animated:YES completion:nil];
+        [cameraAlert show];
+//        UIImagePickerController *takePhoto = [[UIImagePickerController alloc] init];
+//        
+//        takePhoto.delegate = self;
+//        takePhoto.allowsEditing = YES;
+//        takePhoto.sourceType = UIImagePickerControllerSourceTypeCamera;
+//        [self presentViewController:takePhoto animated:YES completion:nil];
     }
-//    if( buttonIndex == 1 )
-//    {
-//        NSLog( @"pressed photo library" );
-//        UIImagePickerController *pickImage = [[UIImagePickerController alloc] init];
-//        pickImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-//        pickImage.delegate = self;
-//        [self presentViewController:pickImage animated:YES completion:nil];
-//    }
+    if( buttonIndex == 1 )
+    {
+        NSLog( @"pressed photo library" );
+        UIImagePickerController *pickImage = [[UIImagePickerController alloc] init];
+        pickImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        pickImage.delegate = self;
+        [self presentViewController:pickImage animated:YES completion:nil];
+    }
     if( buttonIndex == 2 )
         NSLog( @"pressed cancel" );
         
